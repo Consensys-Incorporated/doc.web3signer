@@ -903,7 +903,7 @@ reload-timeout: "45"
   </TabItem>
 </Tabs>
 
-Maximum time, in minutes, allowed for the entire reload operation using the [`reload`](https://consensys.github.io/web3signer/#tag/Reload-Signer-Keys) endpoint.
+Maximum time, in minutes, allowed for the entire reload operation using the [`reload`](https://consensys-incorporated.github.io/web3signer/#tag/Reload-Signer-Keys) endpoint.
 This includes loading from all sources (for example, file system or key vaults).
 The default is 30.
 

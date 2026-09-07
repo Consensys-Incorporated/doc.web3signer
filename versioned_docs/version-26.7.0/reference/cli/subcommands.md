@@ -1066,6 +1066,78 @@ eth1.downstream-http-tls-enabled: true
 Enables or disables [TLS for server connections](../../concepts/tls.md).
 The default is `false`.
 
+#### `downstream-http-tls-keystore-file`
+
+<Tabs>
+
+  <TabItem value="Syntax" label="Syntax" default>
+
+```bash
+--downstream-http-tls-keystore-file=<FILE>
+```
+
+  </TabItem>
+  <TabItem value="Example" label="Example" >
+
+```bash
+--downstream-http-tls-keystore-file=/Users/me/my_node/keystore.pfx
+```
+
+  </TabItem>
+  <TabItem value="Environment variable" label="Environment variable" >
+
+```bash
+WEB3SIGNER_ETH1_DOWNSTREAM_HTTP_TLS_KEYSTORE_FILE=/Users/me/my_node/keystore.pfx
+```
+
+  </TabItem>
+  <TabItem value="Configuration file" label="Configuration file" >
+
+```bash
+eth1.downstream-http-tls-keystore-file: /Users/me/my_node/keystore.pfx
+```
+
+  </TabItem>
+</Tabs>
+
+Keystore used to present during TLS client authentication with the downstream server.
+
+#### `downstream-http-tls-keystore-password-file`
+
+<Tabs>
+
+  <TabItem value="Syntax" label="Syntax" default>
+
+```bash
+--downstream-http-tls-keystore-password-file=<FILE>
+```
+
+  </TabItem>
+  <TabItem value="Example" label="Example" >
+
+```bash
+--downstream-http-tls-keystore-password-file=/Users/me/my_node/keyPassword
+```
+
+  </TabItem>
+  <TabItem value="Environment variable" label="Environment variable" >
+
+```bash
+WEB3SIGNER_ETH1_DOWNSTREAM_HTTP_TLS_KEYSTORE_PASSWORD_FILE=/Users/me/my_node/keyPassword
+```
+
+  </TabItem>
+  <TabItem value="Configuration file" label="Configuration file" >
+
+```bash
+eth1.downstream-http-tls-keystore-password-file: /Users/me/my_node/keyPassword
+```
+
+  </TabItem>
+</Tabs>
+
+File containing the password to decrypt the keystore.
+
 #### `downstream-http-tls-known-servers-file`
 
 <Tabs>

@@ -58,6 +58,17 @@ keystorePasswordFile: "95e57532ede3c1dd879061153f9cfdcdefa9dc5fb9c954a6677bc6641
 ## HashiCorp Vault
 
 Use the private key stored in [HashiCorp Vault](../how-to/store-keys/vaults/hashicorp.md).
+Supports two authentication methods:
+
+- `TOKEN` - Authenticate using a static Vault token. This is the default.
+- `KUBERNETES` - Authenticate using the pod's Kubernetes service account. Web3Signer exchanges the
+  service account token for a short-lived Vault client token.
+
+<!-- markdownlint-disable -->
+
+<Tabs>
+
+  <TabItem value="token" label="TOKEN" default>
 
 ```bash
 type: "hashicorp"
@@ -72,6 +83,26 @@ timeout: "10000"
 token: "s.MuZwBqZ0iE1HzvD64v3HMlhT"
 ```
 
+  </TabItem>
+  <TabItem value="kubernetes" label="KUBERNETES">
+
+```bash
+type: "hashicorp"
+keyType: "SECP256K1"
+tlsEnabled: "true"
+keyPath: "/v1/secret/data/secretPath"
+keyName: "secretName"
+tlsKnownServersPath: "/Users/me/project/knownhosts"
+serverHost: "localhost"
+serverPort: "32895"
+timeout: "10000"
+authMethod: "KUBERNETES"
+kubernetesRole: "web3signer-role"
+```
+
+  </TabItem>
+</Tabs>
+
 | Key | Description |
 | --- | --- |
 | **type** | Type of configuration file. Use `hashicorp`. |
@@ -83,8 +114,14 @@ token: "s.MuZwBqZ0iE1HzvD64v3HMlhT"
 | **serverHost** | Host of the HashiCorp Vault server. |
 | **serverPort** | Port of the HashiCorp Vault server. |
 | **timeout** | Timeout in milliseconds for requests to the HashiCorp Vault server. |
-| **token** | The root token displayed by the HashiCorp Vault server. |
+| **authMethod** | Authentication method used to access HashiCorp Vault. Valid options are `TOKEN` and `KUBERNETES`. The default is `TOKEN`. |
+| **token** | The root token displayed by the HashiCorp Vault server. Required when `authMethod` is `TOKEN`. |
+| **kubernetesRole** | Vault role bound to the pod's Kubernetes service account. Required when `authMethod` is `KUBERNETES`. |
+| **kubernetesAuthPath** | Vault authentication mount path used for the `KUBERNETES` authentication method. The default is `kubernetes`. |
+| **kubernetesServiceAccountTokenPath** | Path to the file containing the Kubernetes service account token. The default is `/var/run/secrets/kubernetes.io/serviceaccount/token`. Relative paths are resolved relative to the signing key configuration file directory. |
 | **httpProtocolVersion** | Override HTTP protocol version that is used to connect to HashiCorp Vault. Valid values are `HTTP_2` and `HTTP_1_1`. The default is `HTTP_2`. |
+
+<!-- markdownlint-enable -->
 
 ## Azure Key Vault
 
@@ -95,6 +132,8 @@ Supports two signing options:
   Supports SECP256K1 signing keys only.
 - `azure-secret` - Web3Signer fetches the keys from the vault and signs locally.
   Supports SECP256K1 and BLS12-381 signing keys.
+
+<!-- markdownlint-disable -->
 
 <Tabs>
 
@@ -123,8 +162,6 @@ keyName: "KeyName"
 
   </TabItem>
 </Tabs>
-
-<!-- markdownlint-disable -->
 
 | Key | Description |
 | --- | --- |

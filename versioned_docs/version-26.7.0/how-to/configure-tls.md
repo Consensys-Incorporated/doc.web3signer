@@ -133,9 +133,9 @@ The command line:
 - Enables TLS using the
   [`--downstream-http-tls-enabled`](../reference/cli/subcommands.md#downstream-http-tls-enabled) option.
 - Specifies the keystore to present during authentication using the
-  `--downstream-http-tls-keystore-file` option.
+  [`--downstream-http-tls-keystore-file`](../reference/cli/subcommands.md#downstream-http-tls-keystore-file) option.
 - Specifies the file that contains the password to decrypt the keystore using the
-  `--downstream-http-tls-keystore-password-file` option.
+  [`--downstream-http-tls-keystore-password-file`](../reference/cli/subcommands.md#downstream-http-tls-keystore-password-file) option.
 - [Specifies the servers](#create-the-known-servers-file) to connect to using the
   [`--downstream-http-tls-known-servers-file`](../reference/cli/subcommands.md#downstream-http-tls-known-servers-file) option.
 
