@@ -1,7 +1,7 @@
 # Web3Signer documentation
 
 This repository contains the source for the
-[Web3Signer](https://github.com/Consensys/web3signer) documentation site.
+[Web3Signer](https://github.com/Consensys-Incorporated/web3signer) documentation site.
 It is built with Docusaurus and published at
 [docs.web3signer.consensys.io](https://docs.web3signer.consensys.io/).
 
