@@ -21,10 +21,10 @@ Web3Signer requires Java 25 or later releases.
 
 ## Install binaries
 
-Download the Web3Signer [packaged binaries](https://github.com/Consensys/web3signer/releases/latest).
+Download the Web3Signer [packaged binaries](https://github.com/Consensys-Incorporated/web3signer/releases/latest).
 
 :::tip
-View the [**Releases** page](https://github.com/Consensys/web3signer/releases) to download a specific version.
+View the [**Releases** page](https://github.com/Consensys-Incorporated/web3signer/releases) to download a specific version.
 :::
 
 Unpack the downloaded files and change into the `web3signer-<release>` directory.

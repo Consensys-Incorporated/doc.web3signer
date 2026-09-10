@@ -20,7 +20,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Consensys", // Usually your GitHub org/user name.
+  organizationName: "Consensys-Incorporated", // Usually your GitHub org/user name.
   projectName: "doc.web3signer", // Usually your repo name.
   deploymentBranch: "gh-pages", // Github Pages deploying branch
 
@@ -39,7 +39,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Set a base path separate from default /docs
-          editUrl: "https://github.com/Consensys/doc.web3signer/tree/main/",
+          editUrl: "https://github.com/Consensys-Incorporated/doc.web3signer/tree/main/",
           path: "docs",
           routeBasePath: "/",
           breadcrumbs: true,
@@ -143,7 +143,7 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            href: "https://github.com/Consensys/web3signer",
+            href: "https://github.com/Consensys-Incorporated/web3signer",
             className: "header-github-link",
             "aria-label": "GitHub",
             title: "GitHub",
@@ -212,11 +212,11 @@ const config = {
               },
               {
                 label: "Web3Signer GitHub",
-                href: "https://github.com/Consensys/web3signer",
+                href: "https://github.com/Consensys-Incorporated/web3signer",
               },
               {
                 label: "Web3Signer documentation GitHub",
-                href: "https://github.com/Consensys/doc.web3signer",
+                href: "https://github.com/Consensys-Incorporated/doc.web3signer",
               },
             ],
           },

@@ -35,4 +35,4 @@ slashing protection for consensus layer validator signing.
 ## Questions
 
 For questions about Web3Signer, use [GitHub Discussions](https://github.com/Consensys-Incorporated/web3signer/discussions) or open an issue in
-the [Web3Signer repository](https://github.com/Consensys/web3signer).
+the [Web3Signer repository](https://github.com/Consensys-Incorporated/web3signer).
