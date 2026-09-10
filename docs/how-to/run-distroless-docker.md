@@ -12,8 +12,7 @@ keywords:
 # Run the distroless Docker image
 
 The [distroless](https://github.com/GoogleContainerTools/distroless) image is an alternative to the
-Ubuntu image.
-It has no shell and no package manager, and it runs as UID `65532`.
+Ubuntu image. It has no shell and no package manager, and it runs as UID `65532`.
 
 A read-only container root filesystem is optional.
 The distroless image is built to start under `docker run --read-only` (or Kubernetes
