@@ -25,8 +25,7 @@ To pull the image and start a container without `--read-only`, see
 
 ## Prerequisites
 
-- The distroless image tag (`consensys/web3signer:<version>-distroless`).
-- A host path for keys or configuration you need to mount into the container.
+- [Java JDK](https://jdk.java.net/)
 
 ## Run with a read-only root filesystem
 
