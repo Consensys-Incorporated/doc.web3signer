@@ -77,5 +77,6 @@ docker run -p <listenPort>:9000 consensys/web3signer:<version>-distroless [optio
 
 ## Use the distroless image
 
-To run distroless with a read-only root filesystem, set JVM options, or import keys without writing
-to disk, see [Run the distroless Docker image](../how-to/run-distroless-docker.md).
+The distroless image does not require `--read-only`.
+For optional read-only root filesystem hardening, the `JAVA_OPTS` difference, and key manager
+imports that skip disk writes, see [Run the distroless Docker image](../how-to/run-distroless-docker.md).
