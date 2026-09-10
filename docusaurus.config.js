@@ -115,7 +115,7 @@ const config = {
       colorMode: {
         defaultMode: "light",
         disableSwitch: false,
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
       tableOfContents: {
         minHeadingLevel: 2,
@@ -145,11 +145,15 @@ const config = {
           {
             href: "https://github.com/Consensys/web3signer",
             className: "header-github-link",
+            "aria-label": "GitHub",
+            title: "GitHub",
             position: "right",
           },
           {
-            href: "https://discord.com/invite/consensys",
-            className: "header-discord-link",
+            href: "https://github.com/Consensys-Incorporated/web3signer/discussions",
+            className: "header-support-link",
+            "aria-label": "GitHub Discussions",
+            title: "GitHub Discussions",
             position: "right",
           },
         ],
@@ -203,8 +207,8 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Consensys Discord",
-                href: "https://discord.com/invite/consensys",
+                label: "GitHub Discussions",
+                href: "https://github.com/Consensys-Incorporated/web3signer/discussions",
               },
               {
                 label: "Web3Signer GitHub",
@@ -473,7 +477,7 @@ const config = {
           texts: {
             welcomeMessage:
               "Hi! I can answer questions about the documentation, its features or usage instructions. Be sure to check the source documentation links that I provide for full details.\n\n" +
-              "Please do not input any of your own or another's personal information i.e, passwords, private keys, seed phrases, personal data, or other sensitive information. If you need support and do not want to engage with me, please reach out to us via Discord. Any information that you provide is not used for training my AI systems. For details on our data handling practices, see our Privacy Policy.\n\n" +
+              "Please do not input any of your own or another's personal information i.e, passwords, private keys, seed phrases, personal data, or other sensitive information. If you need support and do not want to engage with me, please reach out to us on GitHub Discussions. Any information that you provide is not used for training my AI systems. For details on our data handling practices, see our Privacy Policy.\n\n" +
               "By proceeding you acknowledge the above.",
             inputPlaceholder: "Please ask a question",
           }              
