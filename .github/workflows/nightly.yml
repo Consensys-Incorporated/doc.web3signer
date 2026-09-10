@@ -21,7 +21,7 @@
           uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
         - name: LinkCheck
-          uses: Consensys-Incorporated/github-actions/docs-link-check@28327992dc4f4eeeee937abbaebf63f00f4f6068 # main
+          uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
           with:
             CONFIG_FILE: .linkspector.yml
 
@@ -39,7 +39,7 @@
             fi
 
         - name: Slack Notification
-          uses: Consensys-Incorporated/github-actions/slack-notify@28327992dc4f4eeeee937abbaebf63f00f4f6068 # main
+          uses: Consensys-Incorporated/github-actions/slack-notify@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
           env:
             SLACK_CHANNEL: doc-ci-alerts
             SLACK_COLOR: danger
