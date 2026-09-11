@@ -62,6 +62,7 @@ const config = {
             current: {
               label: "development",
               path: "development",
+              noIndex: true,
             },
             //the last stable release in the versioned_docs/version-1.0
             "26.7.0": {
@@ -71,6 +72,9 @@ const config = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        sitemap: {
+          ignorePatterns: ["/development", "/development/**"],
         },
       },
     ],
