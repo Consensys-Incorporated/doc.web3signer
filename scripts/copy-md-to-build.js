@@ -23,6 +23,9 @@
  *
  * Only the stable (root) version is covered. The development version and
  * archived versions are intentionally not exported as raw markdown.
+ *
+ * This script also repairs the home page entry in the generated llms.txt. See
+ * fixLlmsTxtHomeLink below.
  */
 
 const fs = require("fs");
@@ -135,6 +138,47 @@ function getRoutePath(rel, fileName, slug) {
   return rel.split(path.sep).join("/").replace(/\.md$/, "");
 }
 
+/**
+ * Point the llms.txt home page entry at a URL that resolves.
+ *
+ * docusaurus-plugin-llms derives the home page URL from its source path
+ * (docs/index.md) rather than its `slug: /` frontmatter, and then treats the
+ * docs directory as a route prefix, so it emits `<site>/docs.md` — a route that
+ * does not exist. The home page markdown is published at /index.md (from
+ * static/index.md), so rewrite the entry to that.
+ */
+function fixLlmsTxtHomeLink() {
+  const llmsTxtPath = path.join(BUILD_DIR, "llms.txt");
+
+  if (!fs.existsSync(llmsTxtPath)) {
+    console.warn("copy-md-to-build: build/llms.txt not found, skipping home link fix");
+    return;
+  }
+
+  const config = fs.readFileSync(CONFIG_FILE, "utf8");
+  const urlMatch = config.match(/^\s*url:\s*["']([^"']+)["']/m);
+  if (!urlMatch) {
+    throw new Error("copy-md-to-build: no `url` found in docusaurus.config.js");
+  }
+  const siteUrl = urlMatch[1].replace(/\/+$/, "");
+
+  const brokenLink = `${siteUrl}/docs.md`;
+  const homeLink = `${siteUrl}/index.md`;
+  const content = fs.readFileSync(llmsTxtPath, "utf8");
+
+  // A miss means the plugin no longer emits the bad URL, so there is nothing to
+  // rewrite. Warn rather than fail so a plugin fix does not break the build.
+  if (!content.includes(brokenLink)) {
+    console.warn(
+      `copy-md-to-build: ${brokenLink} not found in llms.txt, no home link rewritten`
+    );
+    return;
+  }
+
+  fs.writeFileSync(llmsTxtPath, content.replaceAll(brokenLink, homeLink), "utf8");
+  console.log(`copy-md-to-build: rewrote llms.txt home link to ${homeLink}`);
+}
+
 function walk(dir, sourceRoot) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
@@ -177,3 +221,5 @@ walk(stableDir, stableDir);
 console.log(
   `copy-md-to-build: stable version ${stableVersion} — copied ${copied} files, skipped ${skipped} files`
 );
+
+fixLlmsTxtHomeLink();
