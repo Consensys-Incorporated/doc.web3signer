@@ -36,6 +36,33 @@ The rules under `.cursor/rules/` cover the most actionable parts of these refere
    `docusaurus.config.js` and `vercel.json` where applicable.
 5. **Pass CI linting.** Pull requests are checked by Consensys documentation lint workflows.
 
+## Agent readiness
+
+The site is configured so AI agents and LLM tools can discover, read, and cite it:
+
+| Feature | Where | Notes |
+|---------|-------|-------|
+| `llms.txt` / `llms-full.txt` | `docusaurus-plugin-llms` in `docusaurus.config.js` | Generated at build time from the stable version only. |
+| Raw Markdown at `.md` URLs | `scripts/copy-md-to-build.js` (chained in `npm run build`) | Exports the stable (root) version only; appending `.md` to a root doc URL returns its Markdown source. |
+| Copy page button | `docusaurus-plugin-copy-page-button` via swizzled `src/theme/DocItem/Layout` | Copy as Markdown / open in an AI assistant. |
+| Content negotiation | `vercel.json` `headers` and `rewrites` | Advertises `llms.txt`/`sitemap.xml` and serves Markdown for `Accept: text/markdown`. |
+| Crawler permissions | `static/robots.txt` | Content signals and AI crawler allow rules. |
+| Agent landing page | `static/index.md` | Served at the root for `Accept: text/markdown`, and the target of the `llms.txt` home entry. |
+| Sitemap scope | `sitemap.ignorePatterns` in `docusaurus.config.js` | Excludes `/development` so pre-release URLs are not advertised. |
+
+Both agent-facing pipelines describe the **stable** version served at the site root, not the
+pre-release tree in `docs/` served under `/development/`. `docsDir` for the LLM plugin is
+assigned at the end of `docusaurus.config.js` from `lastVersion`. Editing `docs/` does not
+change `llms.txt`, `llms-full.txt`, or the raw `.md` exports until that version is frozen and
+`lastVersion` is bumped.
+
+Pre-release pages are kept out of the sitemap but remain indexable on purpose, so readers
+searching for unreleased functionality can still find it. The version banner is the in-page
+warning. Do not add `noIndex` to the current version.
+
+When moving, renaming, or deleting stable pages, remember the raw `.md` pipeline mirrors the
+stable version served at the root.
+
 ## AI guidance
 
 Detailed editorial, formatting, and product-specific rules are in `.cursor/rules/`.

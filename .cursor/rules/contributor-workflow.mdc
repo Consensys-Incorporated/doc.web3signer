@@ -39,6 +39,25 @@ When issue context is sparse, verify behavior from source materials before updat
 
 Store doc images in `static/img/` and link them with site paths (for example, `/img/<file-name>`).
 
+## Versioning and agent outputs
+
+`lastVersion` in `docusaurus.config.js` is the single source of truth for the stable version.
+Two consumers read it:
+
+- The `docsDir` assignment at the end of `docusaurus.config.js`, which points
+  `docusaurus-plugin-llms` at `versioned_docs/version-<stable>/`.
+- `scripts/copy-md-to-build.js`, which matches the literal with a regex.
+
+Keep `lastVersion` a literal string. Moving it into a shared constant or variable breaks that
+regex, which then silently falls back to the first entry in `versions.json` — wrong in the window
+after a version is frozen but before `lastVersion` is bumped.
+
+Freezing a version and bumping `lastVersion` is all a release needs; the agent outputs follow.
+
+`scripts/copy-md-to-build.js` also rewrites the `llms.txt` home page entry to `/index.md`.
+That is deliberate: `docusaurus-plugin-llms` discards the `slug: /` frontmatter on the home page
+and emits a URL that does not resolve. Do not remove the rewrite.
+
 ## Keep rule files current
 
 If you change documentation structure, naming, or formatting conventions, update the matching
