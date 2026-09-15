@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Web3Signer component architecture.
+
+  Referenced from Markdown with image syntax, so the SVG renders in isolation and
+  carries its own font stack and frame background rather than inheriting page
+  styles. Cylinder labels are centred on the body below the top rim, not on the
+  whole shape, because the rim reads as a lid.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     font-family="Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 910 462">
+  <rect x="0" y="0" width="910" height="462" fill="#f6f6f6" />
+
+  <!-- Web3Signer instance boundary -->
+  <rect x="20" y="155" width="665" height="145" rx="2"
+        fill="#eceef5" stroke="#aab2d4" stroke-width="2" stroke-dasharray="6 4" />
+  <text x="36" y="178" fill="#4a4f6a" font-size="14">Web3Signer instance</text>
+
+  <!-- Validator client, sending requests from above -->
+  <rect x="500" y="40" width="140" height="70" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="570" y="71">Validator client</text>
+    <text x="570" y="91">or application</text>
+  </g>
+
+  <!-- Key store, feeding the loaded keys from above -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M280,42 a75,12 0 0 1 150,0 v68 a75,12 0 0 1 -150,0 z" />
+    <path d="M280,42 a75,12 0 0 0 150,0" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="355" y="83">Key store:</text>
+    <text x="355" y="103">files or vault</text>
+  </g>
+
+  <!-- Instance components -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="50" y="190" width="175" height="76" rx="2" />
+    <rect x="270" y="190" width="170" height="76" rx="2" />
+    <rect x="485" y="190" width="170" height="76" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="138" y="224">Key management</text>
+    <text x="138" y="244">endpoints</text>
+    <text x="355" y="224">Loaded keys,</text>
+    <text x="355" y="244">held in memory</text>
+    <text x="570" y="233">Signing API</text>
+  </g>
+
+  <!-- Execution client, to the right of the instance -->
+  <rect x="735" y="190" width="150" height="76" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="810" y="233" fill="#1c1e21" font-size="15"
+        text-anchor="middle">Execution client</text>
+
+  <!-- Slashing protection database, below the instance -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M485,362 a85,12 0 0 1 170,0 v68 a85,12 0 0 1 -170,0 z" />
+    <path d="M485,362 a85,12 0 0 0 170,0" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="570" y="403">Slashing protection</text>
+    <text x="570" y="423">database</text>
+  </g>
+
+  <!-- Edges: every line runs centre to centre and stops short of its target -->
+  <g stroke="#4a4f6a" stroke-width="2" fill="none">
+    <line x1="570" y1="110" x2="570" y2="187" />
+    <line x1="355" y1="122" x2="355" y2="187" />
+    <line x1="225" y1="228" x2="267" y2="228" />
+    <line x1="440" y1="228" x2="482" y2="228" />
+    <line x1="655" y1="228" x2="732" y2="228" />
+    <line x1="570" y1="266" x2="570" y2="347" />
+  </g>
+  <g fill="#4a4f6a">
+    <path d="M565,178 L575,178 L570,187 z" />
+    <path d="M350,178 L360,178 L355,187 z" />
+    <path d="M258,223 L258,233 L267,228 z" />
+    <path d="M473,223 L473,233 L482,228 z" />
+    <path d="M723,223 L723,233 L732,228 z" />
+    <path d="M565,338 L575,338 L570,347 z" />
+  </g>
+</svg>
