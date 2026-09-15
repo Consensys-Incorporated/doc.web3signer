@@ -20,7 +20,9 @@ you can run several instances at once.
 Web3Signer loads its keys from a key store, and records consensus signing history in the slashing
 protection database.
 For execution layer signing, it also sits in front of an execution client and forwards the requests
-it does not sign, so your applications can use Web3Signer in place of the node.
+it does not sign.
+Your application sends its JSON-RPC calls to Web3Signer instead of to the execution client, and
+receives the same responses, without ever holding a key.
 
 <p align="center">
 
