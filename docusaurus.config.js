@@ -271,7 +271,7 @@ const config = {
     [
       "docusaurus-plugin-llms",
       {
-        docsDir: "docs",
+        // docsDir is assigned at the end of this file, from `lastVersion`.
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
         title: "Web3Signer documentation",
@@ -489,6 +489,34 @@ const config = {
     ],
   ],
 };
+
+// llms.txt and llms-full.txt must describe the stable release served at the site
+// root, not the pre-release tree in `docs/` that is served under /development/.
+// The stable version changes with every Web3Signer release, so read it back off
+// `lastVersion` instead of repeating a version number here. When `lastVersion` is
+// unset, Docusaurus serves the newest frozen version at the root, so fall back to
+// that rather than generating an empty corpus.
+const stableVersion =
+  config.presets[0][1].docs.lastVersion ??
+  JSON.parse(fs.readFileSync("./versions.json", "utf8"))[0];
+
+if (!stableVersion) {
+  throw new Error("docusaurus.config.js: cannot determine the stable docs version");
+}
+const llmsPlugin = config.plugins.find(
+  (plugin) => Array.isArray(plugin) && plugin[0] === "docusaurus-plugin-llms"
+);
+
+if (!llmsPlugin) {
+  throw new Error("docusaurus.config.js: docusaurus-plugin-llms is not configured");
+}
+
+llmsPlugin[1].docsDir = [
+  {
+    path: `versioned_docs/version-${stableVersion}`,
+    routeBasePath: "/",
+  },
+];
 
 module.exports = config;
 
