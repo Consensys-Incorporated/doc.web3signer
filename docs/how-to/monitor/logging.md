@@ -130,8 +130,15 @@ For more information, see the Log4j [configuration file](https://logging.apache.
 </TabItem>
 </Tabs>
 
-To use your custom configuration, set the environment variable `JAVA_OPTS` to the location of your
+To use your custom configuration, set a JVM environment variable to the location of your
 configuration file.
+
+The binary distribution and the Ubuntu Docker image read `JAVA_OPTS`.
+The [distroless Docker image](../run-distroless-docker.md#pass-jvm-options) ignores `JAVA_OPTS`.
+Use `JDK_JAVA_OPTIONS` (preferred) or `JAVA_TOOL_OPTIONS` instead.
+
+<Tabs>
+<TabItem value="Binary or Ubuntu image" label="Binary or Ubuntu image" default>
 
 ```bash
 export JAVA_OPTS="-Dlog4j.configurationFile=<path_to_file>"
@@ -143,6 +150,20 @@ setting it before starting Web3Signer.
 ```bash title="Set the custom logging and start Web3Signer"
 JAVA_OPTS="-Dlog4j.configurationFile=/Users/me/debug.xml" web3signer --key-store-path=/Users/me/keyFiles/ eth2
 ```
+
+</TabItem>
+<TabItem value="Distroless image" label="Distroless image">
+
+```bash
+docker run -p 9000:9000 \
+  -v <path_to_file>:/var/config/log4j2.xml:ro \
+  -e JDK_JAVA_OPTIONS='-Dlog4j.configurationFile=/var/config/log4j2.xml' \
+  consensys/web3signer:<version>-distroless \
+  eth2 --slashing-protection-enabled=false
+```
+
+</TabItem>
+</Tabs>
 
 :::info Note
 When a custom Log4j2 configuration file is provided, it takes precedence over the [logging command line options](#basic-log-level-setting).
