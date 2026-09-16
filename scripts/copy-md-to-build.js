@@ -141,11 +141,12 @@ function getRoutePath(rel, fileName, slug) {
 /**
  * Point the llms.txt home page entry at a URL that resolves.
  *
- * docusaurus-plugin-llms derives the home page URL from its source path
- * (docs/index.md) rather than its `slug: /` frontmatter, and then treats the
- * docs directory as a route prefix, so it emits `<site>/docs.md` — a route that
- * does not exist. The home page markdown is published at /index.md (from
- * static/index.md), so rewrite the entry to that.
+ * docusaurus-plugin-llms cannot match the home page to a route, because its
+ * `slug: /` frontmatter is discarded as empty. It falls back to a URL built from
+ * the configured docs directory, which resolves to nothing: `<site>/docs.md`
+ * when the plugin reads `docs/`, or `<site>///versioned_docs/version-<stable>.md`
+ * when it reads the stable tree. The home page markdown is published at
+ * /index.md (from static/index.md), so rewrite the entry to that.
  */
 function fixLlmsTxtHomeLink() {
   const llmsTxtPath = path.join(BUILD_DIR, "llms.txt");
@@ -162,21 +163,28 @@ function fixLlmsTxtHomeLink() {
   }
   const siteUrl = urlMatch[1].replace(/\/+$/, "");
 
-  const brokenLink = `${siteUrl}/docs.md`;
+  const escapedSiteUrl = siteUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const brokenLinkPattern = new RegExp(
+    `${escapedSiteUrl}/+(?:docs|versioned_docs/version-[^\\s)]+)\\.md`,
+    "g"
+  );
   const homeLink = `${siteUrl}/index.md`;
   const content = fs.readFileSync(llmsTxtPath, "utf8");
 
   // A miss means the plugin no longer emits the bad URL, so there is nothing to
   // rewrite. Warn rather than fail so a plugin fix does not break the build.
-  if (!content.includes(brokenLink)) {
+  const brokenLinks = content.match(brokenLinkPattern);
+  if (!brokenLinks) {
     console.warn(
-      `copy-md-to-build: ${brokenLink} not found in llms.txt, no home link rewritten`
+      "copy-md-to-build: no unresolved home link found in llms.txt, nothing rewritten"
     );
     return;
   }
 
-  fs.writeFileSync(llmsTxtPath, content.replaceAll(brokenLink, homeLink), "utf8");
-  console.log(`copy-md-to-build: rewrote llms.txt home link to ${homeLink}`);
+  fs.writeFileSync(llmsTxtPath, content.replace(brokenLinkPattern, homeLink), "utf8");
+  console.log(
+    `copy-md-to-build: rewrote llms.txt home link ${brokenLinks[0]} to ${homeLink}`
+  );
 }
 
 function walk(dir, sourceRoot) {
