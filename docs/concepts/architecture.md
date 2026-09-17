@@ -19,14 +19,14 @@ you can run several instances at once.
 
 Web3Signer loads its keys from a key store, and records consensus signing history in the slashing
 protection database.
-For execution layer signing, it also sits in front of an execution client and forwards the requests
+For execution layer signing, it can also sit in front of an execution client and forward the requests
 it does not sign.
-Your application sends its JSON-RPC calls to Web3Signer instead of to the execution client, and
+Your application then sends its JSON-RPC calls to Web3Signer instead of to the execution client, and
 receives the same responses, without ever holding a key.
 
 <p align="center">
 
-![Web3Signer components and the systems it connects to](/img/architecture.svg)
+![Web3Signer components, with the slashing protection database used in eth2 mode and the execution client in eth1 mode](/img/architecture.svg)
 
 </p>
 
@@ -45,8 +45,17 @@ Signing for both layers requires one instance per mode.
 The modes differ in more than the signing algorithm.
 In `eth2` mode, Web3Signer is the endpoint your validator client talks to, and it signs consensus
 payloads such as blocks, attestations, and sync committee messages.
-In `eth1` mode, Web3Signer signs execution layer payloads and forwards the remaining JSON-RPC
-requests to your execution client.
+
+`eth1` mode does two jobs.
+It acts as a JSON-RPC proxy in front of an execution client, implementing the signing methods
+([`eth_accounts`](../reference/api/json-rpc.md#eth_accounts),
+[`eth_sign`](../reference/api/json-rpc.md#eth_sign),
+[`eth_signTypedData`](../reference/api/json-rpc.md#eth_signtypeddata),
+[`eth_signTransaction`](../reference/api/json-rpc.md#eth_signtransaction), and
+[`eth_sendTransaction`](../reference/api/json-rpc.md#eth_sendtransaction)) and forwarding every other
+request to the client.
+It also exposes a [REST](../reference/api/rest.md) endpoint that signs data you supply with a
+secp256k1 key, and that endpoint needs no execution client.
 
 Slashing protection applies only to `eth2` mode, because only consensus layer duties are slashable.
 
@@ -78,7 +87,7 @@ process.
 
 Azure Key Vault keys and AWS KMS never release the private key.
 Web3Signer holds only the public key and sends each signing operation to the key store.
-Both options apply to execution layer signing only.
+Both options apply to execution layer signing only (`eth1` mode).
 
 Consensus layer signing always uses the first model.
 A vault protects your BLS12-381 keys at rest and in transit, but Web3Signer must hold them in memory

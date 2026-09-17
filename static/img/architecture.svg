@@ -73,6 +73,11 @@
     <line x1="655" y1="228" x2="732" y2="228" />
     <line x1="570" y1="266" x2="570" y2="347" />
   </g>
+  <!-- Mode labels: these two connections each exist in one mode only -->
+  <g fill="#4a4f6a" font-size="13">
+    <text x="694" y="219" text-anchor="middle">eth1 mode</text>
+    <text x="580" y="328">eth2 mode</text>
+  </g>
   <g fill="#4a4f6a">
     <path d="M565,178 L575,178 L570,187 z" />
     <path d="M350,178 L360,178 L355,187 z" />
