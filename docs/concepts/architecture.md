@@ -6,33 +6,12 @@ keywords: [remote signing, slashing protection database, high availability]
 
 # Architecture
 
-Web3Signer is a signing service that holds validator keys and signs payloads on request.
-Clients send a signing request over HTTP and receive a signature in response.
-The private keys stay in Web3Signer, so you can run validator clients, and the machines that host
-them, at a lower level of trust than the signer.
-
-Each instance keeps its loaded keys in memory and stores nothing else locally.
-The only persistent component is the [slashing protection](./slashing-protection.md) database, which
-every instance signing for the same validators shares.
-Because Web3Signer holds no durable state of its own, you can replace an instance at any time, and
-you can run several instances at once.
-
-Web3Signer loads its keys from a key store, and records consensus signing history in the slashing
-protection database.
-For execution layer signing, it can also sit in front of an execution client and forward the requests
-it does not sign.
-Your application then sends its JSON-RPC calls to Web3Signer instead of to the execution client, and
-receives the same responses, without ever holding a key.
-
-<p align="center">
-
-![Web3Signer components, with the slashing protection database used in eth2 mode and the execution client in eth1 mode](/img/architecture.svg)
-
-</p>
+Web3Signer is a signing service that holds private keys and signs payloads on request, so the
+clients that need signatures, and the machines hosting them, can run at a lower level of trust than
+the signer.
+It starts in one of two modes, and each mode serves one layer of Ethereum.
 
 ## Signing modes
-
-Web3Signer starts in one of two modes, and each mode serves one layer of Ethereum.
 
 | Mode | Signing keys | Layer | API | Slashing protection |
 | --- | --- | --- | --- | --- |
@@ -42,24 +21,44 @@ Web3Signer starts in one of two modes, and each mode serves one layer of Ethereu
 Each Web3Signer process runs in a single mode.
 Signing for both layers requires one instance per mode.
 
-The modes differ in more than the signing algorithm.
-In `eth2` mode, Web3Signer is the endpoint your validator client talks to, and it signs consensus
-payloads such as blocks, attestations, and sync committee messages.
+In `eth2` mode, Web3Signer signs consensus layer payloads with BLS12-381 keys.
+It is the endpoint your validator client talks to over the [REST API](../reference/api/rest.md), and
+it signs blocks, attestations, and sync committee messages.
+Signatures that carry slashing risk are checked and recorded in a
+[slashing protection](./slashing-protection.md) database, which is enabled by default and shared by
+every instance signing for the same validators.
 
-`eth1` mode does two jobs.
-It acts as a JSON-RPC proxy in front of an execution client, implementing the signing methods
-([`eth_accounts`](../reference/api/json-rpc.md#eth_accounts),
-[`eth_sign`](../reference/api/json-rpc.md#eth_sign),
-[`eth_signTypedData`](../reference/api/json-rpc.md#eth_signtypeddata),
-[`eth_signTransaction`](../reference/api/json-rpc.md#eth_signtransaction), and
-[`eth_sendTransaction`](../reference/api/json-rpc.md#eth_sendtransaction)) and forwarding every other
-request to the client.
-It also exposes a [REST](../reference/api/rest.md) endpoint that signs data you supply with a
-secp256k1 key, and that endpoint needs no execution client.
+In `eth1` mode, Web3Signer signs execution layer payloads with secp256k1 keys.
+It does two jobs:
 
-Slashing protection applies only to `eth2` mode, because only consensus layer duties are slashable.
+- JSON-RPC proxy. Web3Signer implements the
+  [JSON-RPC signing methods](../reference/api/json-rpc.md) and forwards every other
+  request to your execution client.
+  Your application sends its calls to Web3Signer and never holds a key.
+- REST signing. Web3Signer signs data you supply over the
+  [REST API](../reference/api/rest.md).
+  Callers name the key by its secp256k1 public key.
+  JSON-RPC calls name the same key by its Ethereum address.
+  This endpoint needs no execution client.
+
+Slashing protection does not apply, because only consensus layer duties are slashable.
+
+<p align="center">
+
+![eth2 column from the validator client through the consensus REST API to the slashing protection database, and eth1 column from the application through execution signing, with JSON-RPC forwarded to the execution client. The key store and loaded keys are shared.](/img/architecture.svg)
+
+</p>
+
+## Shared components
+
+Both modes share the same core.
+Web3Signer loads its keys from a key store at startup, and stores nothing else locally.
+Because an instance keeps no durable state of its own, you can replace an instance at any time, and
+you can run several instances at once.
 
 ## What Web3Signer checks before signing
+
+### Consensus signing
 
 A consensus signing request carries the payload to sign and its fork information, not a bare hash.
 The request can also include a signing root, but Web3Signer computes the signing root from the
@@ -71,25 +70,40 @@ signature only if that check succeeds.
 Other payload types, such as sync committee messages and voluntary exits, are signed without a
 database check, because those duties carry no slashing risk.
 
+### Execution layer signing
+
+`eth1` mode checks that the request names a key Web3Signer has loaded.
+Web3Signer returns an error when the key is missing.
+It does not inspect the data it signs.
+
+What Web3Signer signs depends on the request:
+
+- A transaction is built from the fields in the request and the chain ID set by
+  [`--chain-id`](../reference/cli/subcommands.md#chain-id).
+  When [`eth_sendTransaction`](../reference/api/json-rpc.md#eth_sendtransaction) omits a nonce,
+  Web3Signer fills it in from the execution client.
+- [`eth_sign`](../reference/api/json-rpc.md#eth_sign) signs the message in the request.
+- The REST endpoint signs the `data` you supply.
+  The request field `applyHash` defaults to `true` and hashes `data` with Keccak-256 before
+  signing.
+  Set `applyHash` to `false` to sign a 32-byte digest unchanged.
+
 ## Where signing keys live
 
 Web3Signer works with a key store in one of two ways, and the difference determines where your
 private keys can be exposed.
 
-### Web3Signer loads the key
+- **Web3Signer loads the key.**
+  Raw key files, keystore files, HashiCorp Vault, Azure Key Vault secrets, AWS Secrets Manager, and
+  GCP Secret Manager supply the private key.
+  Web3Signer fetches or decrypts the key at startup and holds it in memory for the life of the
+  process.
+- **The key stays in the key store.**
+  Azure Key Vault keys and AWS KMS never release the private key.
+  Web3Signer holds only the public key and sends each signing operation to the key store.
+  Both options apply to execution layer signing only (`eth1` mode).
 
-Raw key files, keystore files, HashiCorp Vault, Azure Key Vault secrets, AWS Secrets Manager, and
-GCP Secret Manager all supply the private key to Web3Signer.
-Web3Signer fetches or decrypts the key at startup and holds it in memory for the life of the
-process.
-
-### The key stays in the key store
-
-Azure Key Vault keys and AWS KMS never release the private key.
-Web3Signer holds only the public key and sends each signing operation to the key store.
-Both options apply to execution layer signing only (`eth1` mode).
-
-Consensus layer signing always uses the first model.
+Consensus layer signing always loads the private key into memory.
 A vault protects your BLS12-381 keys at rest and in transit, but Web3Signer must hold them in memory
 to sign, so treat the host that runs Web3Signer as sensitive no matter where you
 [store your keys](../how-to/store-keys/index.md).
@@ -100,12 +114,13 @@ To change the loaded keys on a running instance, use the reload endpoint or the
 
 ## Running multiple instances
 
-Web3Signer is designed to run as several instances behind a load balancer, with every instance
-connected to the same slashing protection database.
+Web3Signer can run as several instances behind a load balancer.
+The following example shows multiple instances in `eth2` mode, with every instance connected to the
+same slashing protection database.
 
 <p align="center">
 
-![Three Web3Signer instances behind a load balancer, sharing one slashing protection database](/img/multiple-instances.svg)
+![Three Web3Signer instances in eth2 mode behind a load balancer, sharing one slashing protection database](/img/multiple-instances.svg)
 
 </p>
 
