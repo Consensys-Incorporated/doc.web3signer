@@ -24,7 +24,9 @@ To pull the image and start a container without `--read-only`, see
 
 ## Prerequisites
 
-- [Java JDK](https://jdk.java.net/)
+- [Docker](https://docs.docker.com/install/)
+
+The image includes its own Java runtime.
 
 ## Run with a read-only root filesystem
 
@@ -61,6 +63,15 @@ Typical writable mounts include:
 - [`--data-path`](../reference/cli/options.md#data-path) if you configure a data directory.
 - File log paths, if you log to a file.
 
+Grant UID `65532` write access on a directory Web3Signer writes, or start the container with
+`--user` set to a UID that already has that access.
+
+If [`--data-path`](../reference/cli/options.md#data-path) is set and Web3Signer cannot write
+`web3signer.ports`, it logs `Error writing ports file` and keeps serving requests.
+A key manager import that cannot write the keystore reports
+`Error importing keystore: Unable to add validator` for that keystore.
+The container keeps running.
+
 PostgreSQL slashing protection writes to the database, not the container root.
 
 ## Pass JVM options
@@ -81,6 +92,11 @@ docker run -p 9000:9000 \
 ```
 
 If a value contains spaces, backslash-escape the spaces in `JDK_JAVA_OPTIONS`.
+
+Pass a debug agent, such as JDWP, in `JDK_JAVA_OPTIONS`.
+`docker kill -s QUIT <container>` prints a JVM thread dump to the container logs.
+Tools that attach to the JVM, such as `jcmd`, need a writable temporary directory.
+With `--read-only`, mount a writable `/tmp` before using those tools.
 
 ## Use the key manager API on a read-only root
 
@@ -109,6 +125,9 @@ Do not use this option unless you have a keystore backup.
 
 ## Limitations
 
-- There is no shell, so you cannot open an interactive debug session in the container.
-- Host bind mounts must be readable by UID `65532`.
-- `JAVA_OPTS` has no effect on the distroless image.
+- There is no shell, so `docker exec -it <container> sh` is unavailable.
+- Bind mounts that Web3Signer reads must be readable by UID `65532`.
+  Bind mounts that it writes must be writable by UID `65532`.
+- `JAVA_OPTS` has no effect.
+  Use `JDK_JAVA_OPTIONS` or `JAVA_TOOL_OPTIONS`.
+  See [Pass JVM options](#pass-jvm-options).
