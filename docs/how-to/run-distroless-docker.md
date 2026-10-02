@@ -44,7 +44,7 @@ Web3Signer can still write to mounted volumes.
 The distroless image starts under `--read-only` without a `/tmp` mount.
 Add a writable `/tmp` only if extra tooling in the container writes there.
 
-Run with `--read-only` and mount any paths Web3Signer must write:
+Run with `--read-only` and mount keys read-only:
 
 ```bash
 docker run --read-only -p 9000:9000 \
