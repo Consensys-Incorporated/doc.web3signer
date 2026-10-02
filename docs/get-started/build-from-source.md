@@ -25,7 +25,7 @@ Web3Signer requires Java 25 or later releases.
 Clone the `Consensys/web3signer` repository:
 
 ```bash
-git clone --recursive https://github.com/Consensys/web3signer.git
+git clone --recursive https://github.com/Consensys-Incorporated/web3signer.git
 ```
 
 ### Build Web3Signer
@@ -68,7 +68,7 @@ bin/web3signer --help
 Clone the `Consensys/web3signer` repository:
 
 ```bat
-git clone --recursive https://github.com/Consensys/web3signer.git
+git clone --recursive https://github.com/Consensys-Incorporated/web3signer.git
 ```
 
 ### Build Web3Signer

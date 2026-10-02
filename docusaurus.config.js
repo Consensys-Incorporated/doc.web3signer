@@ -20,7 +20,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "Consensys", // Usually your GitHub org/user name.
+  organizationName: "Consensys-Incorporated", // Usually your GitHub org/user name.
   projectName: "doc.web3signer", // Usually your repo name.
   deploymentBranch: "gh-pages", // Github Pages deploying branch
 
@@ -39,7 +39,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Set a base path separate from default /docs
-          editUrl: "https://github.com/Consensys/doc.web3signer/tree/main/",
+          editUrl: "https://github.com/Consensys-Incorporated/doc.web3signer/tree/main/",
           path: "docs",
           routeBasePath: "/",
           breadcrumbs: true,
@@ -71,6 +71,9 @@ const config = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        sitemap: {
+          ignorePatterns: ["/development", "/development/**"],
         },
       },
     ],
@@ -115,7 +118,7 @@ const config = {
       colorMode: {
         defaultMode: "light",
         disableSwitch: false,
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
       tableOfContents: {
         minHeadingLevel: 2,
@@ -143,13 +146,17 @@ const config = {
             dropdownActiveClassDisabled: true,
           },
           {
-            href: "https://github.com/Consensys/web3signer",
+            href: "https://github.com/Consensys-Incorporated/web3signer",
             className: "header-github-link",
+            "aria-label": "GitHub",
+            title: "GitHub",
             position: "right",
           },
           {
-            href: "https://discord.com/invite/consensys",
-            className: "header-discord-link",
+            href: "https://github.com/Consensys-Incorporated/web3signer/discussions",
+            className: "header-support-link",
+            "aria-label": "GitHub Discussions",
+            title: "GitHub Discussions",
             position: "right",
           },
         ],
@@ -203,16 +210,16 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Consensys Discord",
-                href: "https://discord.com/invite/consensys",
+                label: "GitHub Discussions",
+                href: "https://github.com/Consensys-Incorporated/web3signer/discussions",
               },
               {
                 label: "Web3Signer GitHub",
-                href: "https://github.com/Consensys/web3signer",
+                href: "https://github.com/Consensys-Incorporated/web3signer",
               },
               {
                 label: "Web3Signer documentation GitHub",
-                href: "https://github.com/Consensys/doc.web3signer",
+                href: "https://github.com/Consensys-Incorporated/doc.web3signer",
               },
             ],
           },
@@ -264,7 +271,7 @@ const config = {
     [
       "docusaurus-plugin-llms",
       {
-        docsDir: "docs",
+        // docsDir is assigned at the end of this file, from `lastVersion`.
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
         title: "Web3Signer documentation",
@@ -473,7 +480,7 @@ const config = {
           texts: {
             welcomeMessage:
               "Hi! I can answer questions about the documentation, its features or usage instructions. Be sure to check the source documentation links that I provide for full details.\n\n" +
-              "Please do not input any of your own or another's personal information i.e, passwords, private keys, seed phrases, personal data, or other sensitive information. If you need support and do not want to engage with me, please reach out to us via Discord. Any information that you provide is not used for training my AI systems. For details on our data handling practices, see our Privacy Policy.\n\n" +
+              "Please do not input any of your own or another's personal information i.e, passwords, private keys, seed phrases, personal data, or other sensitive information. If you need support and do not want to engage with me, please reach out to us on GitHub Discussions. Any information that you provide is not used for training my AI systems. For details on our data handling practices, see our Privacy Policy.\n\n" +
               "By proceeding you acknowledge the above.",
             inputPlaceholder: "Please ask a question",
           }              
@@ -482,6 +489,34 @@ const config = {
     ],
   ],
 };
+
+// llms.txt and llms-full.txt must describe the stable release served at the site
+// root, not the pre-release tree in `docs/` that is served under /development/.
+// The stable version changes with every Web3Signer release, so read it back off
+// `lastVersion` instead of repeating a version number here. When `lastVersion` is
+// unset, Docusaurus serves the newest frozen version at the root, so fall back to
+// that rather than generating an empty corpus.
+const stableVersion =
+  config.presets[0][1].docs.lastVersion ??
+  JSON.parse(fs.readFileSync("./versions.json", "utf8"))[0];
+
+if (!stableVersion) {
+  throw new Error("docusaurus.config.js: cannot determine the stable docs version");
+}
+const llmsPlugin = config.plugins.find(
+  (plugin) => Array.isArray(plugin) && plugin[0] === "docusaurus-plugin-llms"
+);
+
+if (!llmsPlugin) {
+  throw new Error("docusaurus.config.js: docusaurus-plugin-llms is not configured");
+}
+
+llmsPlugin[1].docsDir = [
+  {
+    path: `versioned_docs/version-${stableVersion}`,
+    routeBasePath: "/",
+  },
+];
 
 module.exports = config;
 
