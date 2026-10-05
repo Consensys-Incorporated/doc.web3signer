@@ -111,6 +111,14 @@ curl -X POST http://127.0.0.1:9000/eth/v1/keystores --header "Content-Type: appl
   </TabItem>
 </Tabs>
 
+Import writes keystore files to
+[`--key-store-path`](../reference/cli/options.md#key-config-path-key-store-path).
+On a read-only container root filesystem, that write fails unless you set
+`--Xkey-manager-skip-keystore-storage`.
+See [Run the distroless Docker image](./run-distroless-docker.md#use-the-key-manager-api-on-a-read-only-root).
+
+This is not the `readonly` field returned when you [list keys](#list-keys).
+
 ### Delete keys
 
 Delete keys using the [`delete keys`
