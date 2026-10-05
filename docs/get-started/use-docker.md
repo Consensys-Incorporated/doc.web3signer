@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Run Web3Signer from Docker image
 
 Web3Signer publishes two Docker images.
-Both include Eclipse Temurin JRE 25 and the same Web3Signer application.
+Both include [Eclipse Temurin](https://adoptium.net/temurin/) JRE 25 and the same Web3Signer application.
 
 - Ubuntu image (`consensys/web3signer:<version>`).
   Includes a shell and runs as the `web3signer` user.
@@ -78,5 +78,5 @@ docker run -p <listenPort>:9000 consensys/web3signer:<version>-distroless [optio
 ## Use the distroless image
 
 The distroless image does not require `--read-only`.
-For optional read-only root filesystem hardening, the `JAVA_OPTS` difference, and key manager
+For optional read-only root filesystem hardening, passing JVM options, and key manager
 imports that skip disk writes, see [Run the distroless Docker image](../how-to/run-distroless-docker.md).
