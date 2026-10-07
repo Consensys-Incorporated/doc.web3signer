@@ -1285,6 +1285,30 @@ The default is `20`.
 
 Displays the help and exits.
 
+### `Xhelp`
+
+```bash title="Syntax"
+-X, --Xhelp
+```
+
+Displays the early access options and their descriptions, and exits.
+
+`--help` omits early access options.
+Option names start with `--X`.
+This command is available on the root command, `eth1`, and `eth2`.
+
+- `web3signer -X`, `web3signer --Xhelp`, or `web3signer Xhelp` lists the
+  early access options, grouped by the command that owns them.
+- `web3signer eth2 -X` lists only the `eth2` options.
+- `web3signer eth1 -X` lists only the `eth1` options.
+
+:::caution
+
+Early access options are not yet a final interface.
+They may be added, changed, or removed between releases without announcement.
+
+:::
+
 ### `version`
 
 ```bash title="Syntax"
