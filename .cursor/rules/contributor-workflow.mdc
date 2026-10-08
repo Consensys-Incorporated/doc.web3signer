@@ -54,9 +54,11 @@ after a version is frozen but before `lastVersion` is bumped.
 
 Freezing a version and bumping `lastVersion` is all a release needs; the agent outputs follow.
 
-`scripts/copy-md-to-build.js` also rewrites the `llms.txt` home page entry to `/index.md`.
+`scripts/copy-md-to-build.js` copies the stable home page to `build/index.md` and rewrites the
+`llms.txt` home page entry to `/index.md`.
 That is deliberate: `docusaurus-plugin-llms` discards the `slug: /` frontmatter on the home page
-and emits a URL that does not resolve. Do not remove the rewrite.
+and emits a URL that does not resolve. Do not remove the rewrite, and do not add a
+`static/index.md`. Contributors edit the docs home page only.
 
 ## Keep rule files current
 
