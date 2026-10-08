@@ -145,5 +145,5 @@ dashboard](https://grafana.com/grafana/dashboards/13687).
 
 <!-- Links -->
 
-[Start Teku]: https://docs.teku.consensys.net/how-to/use-external-signer/use-web3signer
+[Start Teku]: https://docs.teku.consensys.com/how-to/use-external-signer/use-web3signer
 [Grafana]: https://grafana.com/docs/grafana/latest/guides/getting_started/

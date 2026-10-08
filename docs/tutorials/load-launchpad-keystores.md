@@ -103,7 +103,7 @@ teku --network=holesky \
 
 <!-- links -->
 
-[Teku installed]: https://docs.teku.consensys.net/get-started/install/install-binaries
+[Teku installed]: https://docs.teku.consensys.com/get-started/install/install-binaries
 [Web3Signer installed]: ../get-started/install-binaries.md
 [slashing protection database]: ../how-to/configure-slashing-protection.md
 [key configuration file]: ../reference/key-config-file-params.md
