@@ -19,7 +19,7 @@
  * at /).
  *
  * This lets agents request, e.g.:
- *   https://docs.web3signer.consensys.io/get-started/install-binaries.md
+ *   https://docs.web3signer.consensys.com/get-started/install-binaries.md
  *
  * Only the stable (root) version is covered. The development version and
  * archived versions are intentionally not exported as raw markdown.
