@@ -1,5 +1,5 @@
 ---
-description: Web3signer security disclosure policy statement
+description: Web3Signer security disclosure policy statement
 sidebar_position: 4
 ---
 
@@ -13,7 +13,7 @@ Please do the following:
 
 - Email your findings to `security-quorum@consensys.net`. Provide sufficient information to reproduce the problem, so we can resolve it as quickly as possible.
 - Do not take advantage of the vulnerability you have discovered.
-- Practice responsible disclosure. That is, don’t reveal the problem to others until either:
+- Practice responsible disclosure. That is, don't reveal the problem to others until either:
   - We have released a fix for the disclosure, or
   - 90 days have passed, or
   - We waive responsible disclosure.
