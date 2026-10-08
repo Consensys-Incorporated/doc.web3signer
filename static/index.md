@@ -9,16 +9,16 @@ using private keys stored in an external vault or encrypted on disk.
 Run Web3Signer to sign on the execution layer and consensus layer using
 secp256k1 and BLS12-381 signing keys.
 
-- [Web3Signer documentation](https://docs.web3signer.consensys.io/)
-- [Run Web3Signer from a Docker image](https://docs.web3signer.consensys.io/get-started/use-docker)
-- [Install the binary distribution](https://docs.web3signer.consensys.io/get-started/install-binaries)
-- [Start Web3Signer](https://docs.web3signer.consensys.io/get-started/start-web3signer)
+- [Web3Signer documentation](https://docs.web3signer.consensys.com/)
+- [Run Web3Signer from a Docker image](https://docs.web3signer.consensys.com/get-started/use-docker)
+- [Install the binary distribution](https://docs.web3signer.consensys.com/get-started/install-binaries)
+- [Start Web3Signer](https://docs.web3signer.consensys.com/get-started/start-web3signer)
 
 ## Reference
 
-- [Web3Signer command line options](https://docs.web3signer.consensys.io/reference/cli/options)
-- [Web3Signer REST API](https://docs.web3signer.consensys.io/reference/api/rest)
-- [Key configuration file parameters](https://docs.web3signer.consensys.io/reference/key-config-file-params)
+- [Web3Signer command line options](https://docs.web3signer.consensys.com/reference/cli/options)
+- [Web3Signer REST API](https://docs.web3signer.consensys.com/reference/api/rest)
+- [Key configuration file parameters](https://docs.web3signer.consensys.com/reference/key-config-file-params)
 
 ## What Web3Signer supports
 
@@ -28,9 +28,9 @@ slashing protection for consensus layer validator signing.
 
 ## Agent-readable resources
 
-- [llms.txt](https://docs.web3signer.consensys.io/llms.txt) lists the main documentation pages.
-- [llms-full.txt](https://docs.web3signer.consensys.io/llms-full.txt) contains the full documentation corpus in one Markdown file.
-- [sitemap.xml](https://docs.web3signer.consensys.io/sitemap.xml) lists the published site URLs.
+- [llms.txt](https://docs.web3signer.consensys.com/llms.txt) lists the main documentation pages.
+- [llms-full.txt](https://docs.web3signer.consensys.com/llms-full.txt) contains the full documentation corpus in one Markdown file.
+- [sitemap.xml](https://docs.web3signer.consensys.com/sitemap.xml) lists the published site URLs.
 
 ## Questions
 
