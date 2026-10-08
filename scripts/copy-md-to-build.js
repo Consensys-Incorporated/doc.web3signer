@@ -13,10 +13,9 @@
  *   versioned_docs/version-<stable>/path/to/page.md       → build/path/to/page.md
  *   versioned_docs/version-<stable>/path/to/dir/index.md  → build/path/to/dir.md
  *
- * A page's `slug` frontmatter overrides the file path. For example the stable
- * index.md uses `slug: /`, so it resolves to the site root, which is left to
- * static/index.md (the agent landing page served for `Accept: text/markdown`
- * at /).
+ * A page's `slug` frontmatter overrides the file path. The stable home page
+ * uses `slug: /`, so it is written to build/index.md. That file is what agents
+ * receive for `Accept: text/markdown` at /. There is no separate static copy.
  *
  * This lets agents request, e.g.:
  *   https://docs.web3signer.consensys.io/get-started/install-binaries.md
@@ -146,7 +145,7 @@ function getRoutePath(rel, fileName, slug) {
  * the configured docs directory, which resolves to nothing: `<site>/docs.md`
  * when the plugin reads `docs/`, or `<site>///versioned_docs/version-<stable>.md`
  * when it reads the stable tree. The home page markdown is published at
- * /index.md (from static/index.md), so rewrite the entry to that.
+ * /index.md by this script, so rewrite the entry to that.
  */
 function fixLlmsTxtHomeLink() {
   const llmsTxtPath = path.join(BUILD_DIR, "llms.txt");
@@ -202,15 +201,10 @@ function walk(dir, sourceRoot) {
 
       const content = fs.readFileSync(fullPath, "utf8");
       const routePath = getRoutePath(rel, entry.name, getSlug(content));
-
-      // The site root is reserved for static/index.md (the agent landing page),
-      // so never overwrite build/index.md from the docs tree.
-      if (routePath === "") {
-        skipped++;
-        continue;
-      }
-
-      const destPath = path.join(BUILD_DIR, ...`${routePath}.md`.split("/"));
+      // The home page slug is `/`, which is an empty route. Publish it at
+      // /index.md, the URL agents request for the site root.
+      const destRelative = routePath === "" ? "index.md" : `${routePath}.md`;
+      const destPath = path.join(BUILD_DIR, ...destRelative.split("/"));
       fs.mkdirSync(path.dirname(destPath), { recursive: true });
       fs.writeFileSync(destPath, addDirective(content), "utf8");
       copied++;

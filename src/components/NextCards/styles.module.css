@@ -1,0 +1,19 @@
+.card {
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover {
+  color: inherit;
+  text-decoration: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.description {
+  margin-bottom: 0;
+}

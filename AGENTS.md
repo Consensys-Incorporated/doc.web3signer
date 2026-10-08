@@ -47,7 +47,7 @@ The site is configured so AI agents and LLM tools can discover, read, and cite i
 | Copy page button | `docusaurus-plugin-copy-page-button` via swizzled `src/theme/DocItem/Layout` | Copy as Markdown / open in an AI assistant. |
 | Content negotiation | `vercel.json` `headers` and `rewrites` | Advertises `llms.txt`/`sitemap.xml` and serves Markdown for `Accept: text/markdown`. |
 | Crawler permissions | `static/robots.txt` | Content signals and AI crawler allow rules. |
-| Agent landing page | `static/index.md` | Served at the root for `Accept: text/markdown`, and the target of the `llms.txt` home entry. |
+| Agent landing page | Stable `index.md`, copied to `/index.md` by `scripts/copy-md-to-build.js` | Served at the root for `Accept: text/markdown`, and the target of the `llms.txt` home entry. Edit the docs home page only. Do not add `static/index.md`. |
 | Sitemap scope | `sitemap.ignorePatterns` in `docusaurus.config.js` | Excludes `/development` so pre-release URLs are not advertised. |
 
 Both agent-facing pipelines describe the **stable** version served at the site root, not the
