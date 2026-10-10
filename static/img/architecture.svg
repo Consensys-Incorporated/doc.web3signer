@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Web3Signer component architecture.
+
+  Referenced from Markdown with image syntax, so the SVG renders in isolation and
+  carries its own font stack and frame background rather than inheriting page
+  styles. Cylinder labels are centred on the body below the top rim, not on the
+  whole shape, because the rim reads as a lid.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     font-family="Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 980 552">
+  <rect x="0" y="0" width="980" height="552" fill="#f6f6f6" />
+
+  <!-- Instance fill. Stroke is redrawn after the column shades so the border stays continuous. -->
+  <rect x="24" y="164" width="900" height="188" rx="2" fill="#eceef5" />
+
+  <!-- Mode columns. Shared key store, key management, and loaded keys stay on the page background. -->
+  <rect x="424" y="8" width="198" height="524" rx="2" fill="#dfe6fb" />
+  <rect x="624" y="8" width="270" height="524" rx="2" fill="#f3eadc" />
+  <g fill="#4a4f6a" font-size="13" font-weight="600" text-anchor="middle">
+    <text x="523" y="44">eth2</text>
+    <text x="759" y="44">eth1</text>
+  </g>
+
+  <rect x="24" y="164" width="900" height="188" rx="2"
+        fill="none" stroke="#aab2d4" stroke-width="2" stroke-dasharray="6 4" />
+  <text x="40" y="188" fill="#4a4f6a" font-size="14">Web3Signer instance</text>
+
+  <!-- Key store -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M253,54 a75,12 0 0 1 150,0 v52 a75,12 0 0 1 -150,0 z" />
+    <path d="M253,54 a75,12 0 0 0 150,0" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="328" y="88">Key store:</text>
+    <text x="328" y="108">files or vault</text>
+  </g>
+
+  <!-- Validator client -->
+  <rect x="447" y="58" width="156" height="64" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="525" y="96" fill="#1c1e21" font-size="15" text-anchor="middle">Validator client</text>
+
+  <!-- Application -->
+  <rect x="686" y="58" width="176" height="64" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="774" y="96" fill="#1c1e21" font-size="15" text-anchor="middle">Application</text>
+
+  <!-- Instance components -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="48" y="214" width="168" height="76" rx="2" />
+    <rect x="244" y="214" width="168" height="76" rx="2" />
+    <rect x="440" y="214" width="170" height="76" rx="2" />
+    <rect x="648" y="214" width="230" height="76" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="132" y="246">Key management</text>
+    <text x="132" y="266">endpoints</text>
+    <text x="328" y="246">Loaded keys,</text>
+    <text x="328" y="266">held in memory</text>
+    <text x="525" y="246">Consensus</text>
+    <text x="525" y="266">REST API</text>
+    <text x="763" y="246">Execution signing</text>
+    <text x="763" y="266">JSON-RPC and REST</text>
+  </g>
+
+  <!-- Slashing protection database -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M440,446 a85,12 0 0 1 170,0 v64 a85,12 0 0 1 -170,0 z" />
+    <path d="M440,446 a85,12 0 0 0 170,0" fill="none" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="525" y="484">Slashing protection</text>
+    <text x="525" y="504">database</text>
+  </g>
+  <!-- Execution client -->
+  <rect x="648" y="440" width="230" height="76" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="763" y="470" fill="#1c1e21" font-size="15" text-anchor="middle">Execution client</text>
+  <text x="763" y="492" fill="#4a4f6a" font-size="13" text-anchor="middle">JSON-RPC proxy only</text>
+
+  <g stroke="#4a4f6a" stroke-width="2" fill="none">
+    <line x1="328" y1="130" x2="328" y2="204" />
+    <line x1="525" y1="122" x2="525" y2="204" />
+    <line x1="720" y1="122" x2="720" y2="204" />
+    <line x1="828" y1="122" x2="828" y2="204" />
+    <line x1="216" y1="252" x2="234" y2="252" />
+    <line x1="412" y1="252" x2="430" y2="252" />
+    <line x1="328" y1="290" x2="328" y2="328" />
+    <line x1="328" y1="328" x2="514" y2="328" />
+    <line x1="536" y1="328" x2="630" y2="328" />
+    <line x1="630" y1="328" x2="630" y2="252" />
+    <line x1="630" y1="252" x2="639" y2="252" />
+    <line x1="525" y1="290" x2="525" y2="434" />
+    <line x1="720" y1="290" x2="720" y2="438" />
+  </g>
+
+  <g fill="#4a4f6a">
+    <path d="M323,204 L333,204 L328,213 z" />
+    <path d="M520,204 L530,204 L525,213 z" />
+    <path d="M715,204 L725,204 L720,213 z" />
+    <path d="M823,204 L833,204 L828,213 z" />
+    <path d="M234,247 L234,257 L243,252 z" />
+    <path d="M430,247 L430,257 L439,252 z" />
+    <path d="M639,247 L639,257 L648,252 z" />
+    <path d="M520,425 L530,425 L525,434 z" />
+    <path d="M715,429 L725,429 L720,438 z" />
+  </g>
+
+  <g fill="#4a4f6a" font-size="13">
+    <text x="534" y="148">REST</text>
+    <text x="712" y="148" text-anchor="end">JSON-RPC</text>
+    <text x="836" y="148">REST sign</text>
+    <text x="732" y="372">forwarded calls</text>
+  </g>
+</svg>
