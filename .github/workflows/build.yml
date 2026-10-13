@@ -7,6 +7,8 @@ on:
     branches:
       - main
 
+permissions: {} # lock everything by default (least-privilege)
+
 jobs:
   build:
     name: Build

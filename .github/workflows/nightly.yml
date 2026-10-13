@@ -10,6 +10,8 @@
     group: nightly-${{ github.ref }}
     cancel-in-progress: true
 
+  permissions: {} # lock everything by default (least-privilege)
+
   jobs:
     linkCheck:
       name: Run link check

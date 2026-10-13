@@ -9,6 +9,8 @@ on:
   schedule:
     - cron: "0 1 * * *"      
 
+permissions: {} # lock everything by default (least-privilege)
+
 jobs:
   trivy:
     name: Run trivy scanner
