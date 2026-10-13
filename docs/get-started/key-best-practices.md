@@ -13,7 +13,7 @@ This page covers key generation, storage, access control, and system security.
 - Use cryptographically secure random number generators for key generation.
 - Implement proper key rotation policies to limit the impact of potential key compromises.
 
-## Store keys in a vault 
+## Store keys in a vault
 
 - Use dedicated key management solutions such as HashiCorp Vault or AWS Key Management Service (KMS).
 - Implement encryption for keys at rest and in transit.
