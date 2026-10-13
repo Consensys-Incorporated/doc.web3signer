@@ -8,6 +8,7 @@ jobs:
   indexnow:
     environment: analytics
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Submit to IndexNow
         uses: bojieyang/indexnow-action@38ddfbd93579a8a44c0dee662121bf9d51098f71 # 3.0.0

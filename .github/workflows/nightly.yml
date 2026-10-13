@@ -29,6 +29,8 @@
       needs: linkCheck
       if: ${{ failure() }}
       runs-on: ubuntu-latest
+      permissions:
+        contents: read
       steps:
         - name: Debug secret
           run: |
