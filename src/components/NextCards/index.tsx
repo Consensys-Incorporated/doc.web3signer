@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import {useActiveDocContext} from "@docusaurus/plugin-content-docs/client";
+import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
 
 export type NextCardItem = {
@@ -34,7 +35,9 @@ export default function NextCards({
             className={clsx("card padding--lg", styles.card)}
             to={toHref(versionPath, item.path)}
           >
-            <h3 className={styles.title}>{item.title}</h3>
+            <Heading as="h3" className={styles.title}>
+              {item.title}
+            </Heading>
             <p className={styles.description}>{item.description}</p>
           </Link>
         </div>
