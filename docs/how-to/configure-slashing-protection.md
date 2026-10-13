@@ -194,7 +194,7 @@ The default timeout is 3000 milliseconds.
 [run the PostgreSQL database in a container]: https://hub.docker.com/_/postgres/
 [Flyway]: https://flywaydb.org/documentation/
 [include the port number in the database URL]: https://jdbc.postgresql.org/documentation/use/#connecting-to-the-database
-[Teku]: https://docs.teku.consensys.net/how-to/use-external-signer/use-web3signer
+[Teku]: https://docs.teku.consensys.com/how-to/use-external-signer/use-web3signer
 [connect to the database]: https://jdbc.postgresql.org/documentation/use/#connecting-to-the-database
 [validator client interchange format]: https://eips.ethereum.org/EIPS/eip-3076
 [HikariCP]: https://github.com/brettwooldridge/HikariCP

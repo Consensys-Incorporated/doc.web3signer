@@ -148,5 +148,5 @@ option is `true` by default and allows connections to servers with trusted root 
 
 [Allow all clients with trusted CA certificates to connect]: ../reference/cli/options.md#tls-allow-ca-clients
 [Allow any client to connect]: ../reference/cli/options.md#tls-allow-any-client
-[Teku]: https://docs.teku.consensys.net/
-[Teku tutorial]: https://docs.teku.consensys.net/tutorials/configure-external-signer-tls
+[Teku]: https://docs.teku.consensys.com/
+[Teku tutorial]: https://docs.teku.consensys.com/tutorials/configure-external-signer-tls
