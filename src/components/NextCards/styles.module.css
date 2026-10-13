@@ -20,15 +20,15 @@
   color: var(--ifm-color-emphasis-800);
 }
 
-.card:hover .title,
-.card:hover .description {
-  color: var(--ifm-color-emphasis-700);
-}
-
-.title {
+.card .title {
   font-size: 1.1rem;
 }
 
-.description {
+.card .description {
   margin-bottom: 0;
+}
+
+.card:hover .title,
+.card:hover .description {
+  color: var(--ifm-color-emphasis-700);
 }
