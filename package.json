@@ -56,6 +56,12 @@
     "tsc-files": "^1.1.4",
     "typescript": "^5.9.3"
   },
+  "overrides": {
+    "serialize-javascript": "7.1.2",
+    "@typescript-eslint/typescript-estree@6.21.0": {
+      "minimatch": "9.0.9"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.5%",
