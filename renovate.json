@@ -5,6 +5,10 @@
   ],
   "enabledManagers": ["github-actions", "npm"],
   "dependencyDashboard": false,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"]
+  },
   "packageRules": [
     {
       "description": "Pin all GitHub Actions to SHA digests",
@@ -14,9 +18,9 @@
       "groupName": "Renovatebot GHA Updates"
     },
     {
-      "description": "Allow immediate updates for ConsenSys/github-actions",
+      "description": "Allow immediate updates for Consensys-Incorporated/github-actions",
       "matchManagers": ["github-actions"],
-      "matchPackagePrefixes": ["ConsenSys/github-actions"],
+      "matchPackageNames": ["Consensys-Incorporated/github-actions"],
       "minimumReleaseAge": "0 days"
     },
     {
@@ -24,6 +28,17 @@
       "matchManagers": ["npm"],
       "minimumReleaseAge": "7 days",
       "groupName": "npm dependencies"
+    },
+    {
+      "description": "Lock file maintenance has no release timestamp; npm still resolves with the minimum release age",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "minimumReleaseAgeBehaviour": "timestamp-optional"
+    },
+    {
+      "description": "Keep overrides on their current major version",
+      "matchDepTypes": ["overrides"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
