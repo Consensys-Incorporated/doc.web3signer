@@ -23,7 +23,7 @@ export default function NextCards({
   items,
 }: {
   items: NextCardItem[];
-}): JSX.Element {
+}): React.JSX.Element {
   const {activeVersion} = useActiveDocContext("default");
   const versionPath = activeVersion?.path ?? "";
 
