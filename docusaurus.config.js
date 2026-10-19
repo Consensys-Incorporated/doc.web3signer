@@ -224,7 +224,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} Consensys, Inc.`,
+        copyright: `© ${new Date().getFullYear()} Consensys Incorporated`,
       },
       prism: {
         theme: lightCodeTheme,
