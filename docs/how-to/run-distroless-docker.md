@@ -103,8 +103,8 @@ With `--read-only`, mount a writable `/tmp` before using those tools.
 [Importing keystores](./manage-keys.md#import-keystores) writes files under `--key-store-path`.
 That write fails when the key store path is on a read-only root filesystem.
 
-To keep imported keys in memory only, set the early access
-`--Xkey-manager-skip-keystore-storage` option on the `eth2` subcommand:
+To keep imported keys in memory only, set the early access option
+`--Xkey-manager-skip-keystore-storage` on the `eth2` subcommand:
 
 ```bash
 docker run --read-only -p 9000:9000 \
@@ -114,9 +114,12 @@ docker run --read-only -p 9000:9000 \
        --slashing-protection-enabled=false
 ```
 
-:::tip Early access feature
+:::tip Early access option
 
-`--Xkey-manager-skip-keystore-storage` is an early access option and is hidden from `--help`.
+`--Xkey-manager-skip-keystore-storage` is an early access option.
+`--help` omits it.
+List early access options with
+[`web3signer eth2 -X`](../reference/cli/options.md#xhelp).
 Imported keys exist only in memory and are lost on restart.
 Re-import keys after every restart.
 Do not use this option unless you have a keystore backup.
