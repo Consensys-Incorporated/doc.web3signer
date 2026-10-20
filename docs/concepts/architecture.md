@@ -62,18 +62,18 @@ Slashing protection does not apply, because only consensus layer duties are slas
 
 ## Where signing keys live
 
-Web3Signer works with a key store in one of two ways, and the difference determines where your
-private keys can be exposed.
+Web3Signer works with a key store in one of two ways, and the choice determines whether your
+private keys are held in Web3Signer's memory or stay inside the key store.
 
-- **Web3Signer loads the key.**
+- **Web3Signer loads the private key from the key store.**
   Raw key files, keystore files, HashiCorp Vault, Azure Key Vault secrets, AWS Secrets Manager, and
-  GCP Secret Manager supply the private key.
+  GCP Secret Manager work this way.
   Web3Signer fetches or decrypts the key at startup and holds it in memory for the life of the
   process.
-- **The key stays in the key store.**
-  Azure Key Vault keys and AWS KMS never release the private key.
+- **The private key stays in the key store.**
+  Azure Key Vault keys and AWS KMS work this way.
   Web3Signer holds only the public key and sends each signing operation to the key store.
-  Both options apply to execution layer signing only (`eth1` mode).
+  These key stores support execution layer signing only (`eth1` mode).
 
 Consensus layer signing always loads the private key into memory.
 A vault protects your BLS12-381 keys at rest and in transit, but Web3Signer must hold them in memory
