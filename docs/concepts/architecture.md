@@ -118,7 +118,7 @@ Instances that load different keys don't need to share a database.
 For sizing, load balancing, and tuning guidance, see
 [run Web3Signer at scale](../how-to/run-at-scale.md).
 
-## Access to the signing API
+## Controlling access to Web3Signer
 
 Web3Signer doesn't limit which loaded keys a client can use.
 If a request reaches the signing API and names a key the instance loaded, Web3Signer signs it.
@@ -137,7 +137,7 @@ Use [TLS](../how-to/configure-tls.md) to encrypt connections, and client certifi
 only trusted clients.
 With or without TLS, Web3Signer doesn't limit which loaded keys a client can use.
 
-## Failure modes
+## Monitoring and recovery
 
 Three behaviors are worth knowing before you plan monitoring and recovery:
 
