@@ -24,8 +24,8 @@ Web3Signer only supports PostgreSQL for creating the slashing protection databas
 
 Multiple Web3Signer instances can connect to the same slashing protection database.
 Every instance signs, and the shared database keeps them consistent.
-When instances that load the same keys receive conflicting requests for the same validator, the
-database serializes those requests, so only the first request is signed.
+When instances that load the same keys receive requests for the same validator, the database
+serializes those requests and refuses any request that conflicts with a recorded signature.
 For more information, see
 [running multiple instances](./architecture.md#running-multiple-instances).
 
