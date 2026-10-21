@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Web3Signer in eth1 mode.
+
+  Referenced from Markdown with image syntax, so the SVG renders in isolation and
+  carries its own font stack and frame background rather than inheriting page
+  styles. Cylinder labels are centred on the body below the top rim, not on the
+  whole shape, because the rim reads as a lid.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     font-family="Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 494 400">
+  <rect x="0" y="0" width="494" height="400" fill="#f6f6f6" />
+
+  <!-- Instance -->
+  <rect x="24" y="106" width="446" height="134" rx="2" fill="#f3eadc"
+        stroke="#aab2d4" stroke-width="2" stroke-dasharray="6 4" />
+  <text x="48" y="130" fill="#4a4f6a" font-size="14">Web3Signer instance in eth1 mode</text>
+
+  <!-- Application -->
+  <rect x="300" y="24" width="170" height="64" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="385" y="62" fill="#1c1e21" font-size="15" text-anchor="middle">Application</text>
+
+  <!-- Instance components -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="48" y="146" width="122" height="70" rx="2" />
+    <rect x="186" y="146" width="122" height="70" rx="2" />
+    <rect x="324" y="146" width="122" height="70" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="14" text-anchor="middle">
+    <text x="109" y="176">Reload keys</text>
+    <text x="109" y="194">endpoint</text>
+    <text x="247" y="176">Loaded keys</text>
+    <text x="247" y="194">or public keys</text>
+    <text x="385" y="176">Execution</text>
+    <text x="385" y="194">signing API</text>
+  </g>
+
+  <!-- Key store -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M158,300 a72,12 0 0 1 144,0 v64 a72,12 0 0 1 -144,0 z" />
+    <path d="M158,300 a72,12 0 0 0 144,0" fill="none" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="230" y="338">Key store:</text>
+    <text x="230" y="358">files or vault</text>
+  </g>
+
+  <!-- Execution client -->
+  <rect x="316" y="288" width="138" height="76" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="385" y="320" fill="#1c1e21" font-size="15" text-anchor="middle">Execution client</text>
+  <text x="385" y="342" fill="#4a4f6a" font-size="13" text-anchor="middle">JSON-RPC proxy only</text>
+
+  <g stroke="#4a4f6a" stroke-width="2" fill="none">
+    <line x1="360" y1="88" x2="360" y2="137" />
+    <line x1="410" y1="88" x2="410" y2="137" />
+    <line x1="170" y1="181" x2="177" y2="181" />
+    <line x1="308" y1="181" x2="315" y2="181" />
+    <line x1="230" y1="288" x2="230" y2="225" />
+    <line x1="360" y1="216" x2="360" y2="279" />
+  </g>
+
+  <g fill="#4a4f6a">
+    <path d="M355,137 L365,137 L360,146 z" />
+    <path d="M405,137 L415,137 L410,146 z" />
+    <path d="M177,176 L177,186 L186,181 z" />
+    <path d="M315,176 L315,186 L324,181 z" />
+    <path d="M225,225 L235,225 L230,216 z" />
+    <path d="M355,279 L365,279 L360,288 z" />
+  </g>
+
+  <g fill="#4a4f6a" font-size="13">
+    <text x="352" y="102" text-anchor="end">JSON-RPC</text>
+    <text x="418" y="102">REST sign</text>
+    <text x="370" y="256">forwarded calls</text>
+  </g>
+</svg>

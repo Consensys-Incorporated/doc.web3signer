@@ -52,7 +52,8 @@ You can use the following [metrics](./monitor/metrics.md):
 At scale, deploy multiple Web3Signer instances behind a load balancer. This setup ensures balanced
 request distribution. Use an ingress load balancer to spread requests evenly across instances. This
 prevents overloading of single instances. Connect all Web3Signer instances to the same slashing database.
-This allows parallel signing without slashing risk.
+For how the shared database lets every instance sign in parallel without slashing risk, see
+[running multiple instances](../concepts/architecture.md#running-multiple-instances).
 
 For more information, see
 the [Kiln article](https://www.kiln.fi/post/learnings-from-running-web3signer-at-scale-on-holesky) on
