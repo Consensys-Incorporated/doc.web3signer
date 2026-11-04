@@ -2,11 +2,7 @@
 title: Run the distroless Docker image
 description: Run the Web3Signer distroless Docker image, including optional read-only root filesystem hardening.
 sidebar_position: 9
-keywords:
-  [
-    docker,
-    distroless,
-  ]
+keywords: [docker, distroless]
 ---
 
 # Run the distroless Docker image

@@ -13,15 +13,15 @@ import Supported from '@site/src/components/Supported';
 Load signing keys using a [key configuration file], or bulk load using the [`eth1` and `eth2` subcommands].
 Web3Signer supports loading keys with the following methods:
 
-| Key storage                          | Key configuration file | Bulk load with `eth1` | Bulk load with `eth2` |
-|--------------------------------------|:----------------------:|:---------------------:|:---------------------:|
-| [Keystore files]                     |      <Supported />     |      <Supported />     |      <Supported />     |
-| **Vaults**                           |                        |                       |                       |
-| [Hashicorp Vault]                    |      <Supported />     |                       |                       |
-| [Azure Key Vault]                    |      <Supported />     |      <Supported />     |      <Supported />     |
-| [AWS Secrets Manager]                |      <Supported />     |                       |      <Supported />     |
-| [AWS KMS]                            |      <Supported />     |      <Supported />     |                       |
-| [GCP Secret Manager]                 |                        |                       |      <Supported />     |
+| Key storage           | Key configuration file | Bulk load with `eth1` | Bulk load with `eth2` |
+| --------------------- | :--------------------: | :-------------------: | :-------------------: |
+| [Keystore files]      |     <Supported />      |     <Supported />     |     <Supported />     |
+| **Vaults**            |                        |                       |                       |
+| [Hashicorp Vault]     |     <Supported />      |                       |                       |
+| [Azure Key Vault]     |     <Supported />      |     <Supported />     |     <Supported />     |
+| [AWS Secrets Manager] |     <Supported />      |                       |     <Supported />     |
+| [AWS KMS]             |     <Supported />      |     <Supported />     |                       |
+| [GCP Secret Manager]  |                        |                       |     <Supported />     |
 
 :::note
 You can bulk load in combination with using key configuration files.

@@ -47,30 +47,30 @@ After installing [HashiCorp Vault](https://learn.hashicorp.com/vault/getting-sta
 
    <TabItem value="Result if v2 (with metadata)" label="Result if v2 (with metadata)" default>
 
-   ```text
-   ====== Metadata ======
-   Key              Value
-   ---              -----
-   created_time     2020-11-27T10:15:59.91752Z
-   deletion_time    n/a
-   destroyed        false
-   version          1
+```text
+====== Metadata ======
+Key              Value
+---              -----
+created_time     2020-11-27T10:15:59.91752Z
+deletion_time    n/a
+destroyed        false
+version          1
 
-   ==== Data ====
-   Key      Value
-   ---      -----
-   value    17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
-   ```
+==== Data ====
+Key      Value
+---      -----
+value    17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
+```
 
    </TabItem>
    <TabItem value="Result if v1" label="Result if v1" >
 
-   ```text
-   ==== Data ====
-   Key      Value
-   ---      -----
-   value    17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
-   ```
+```text
+==== Data ====
+Key      Value
+---      -----
+value    17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
+```
 
   </TabItem>
 </Tabs>
@@ -82,16 +82,16 @@ After installing [HashiCorp Vault](https://learn.hashicorp.com/vault/getting-sta
 
   <TabItem value="Command" label="Command" default>
 
-   ```bash
-   vault kv put secret/web3signerSigningKey value=<Private Key without 0x prefix>
-   ```
+```bash
+vault kv put secret/web3signerSigningKey value=<Private Key without 0x prefix>
+```
 
   </TabItem>
   <TabItem value="Example" label="Example" >
 
-   ```bash
-   vault kv put secret/web3signerSigningKey value=17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
-   ```
+```bash
+vault kv put secret/web3signerSigningKey value=17079f966aa2d5db1678ed32467165bbbd640868e7371ade8d5812ea856d2bbf
+```
 
   </TabItem>
 </Tabs>
