@@ -9,7 +9,7 @@ The Web3Signer REST API exposes:
 
 - **Consensus layer (ETH2) endpoints** — use these to sign consensus layer payloads.
 - **Execution layer (ETH1) endpoints** — **basic** signing only; they do **not** perform transaction
-    encoding or return a full Ethereum transaction signature.
+  encoding or return a full Ethereum transaction signature.
 
 :::info Recommendation
 For execution layer transactions, use the [Web3Signer JSON-RPC API](json-rpc.md) instead of the ETH1 REST endpoints.

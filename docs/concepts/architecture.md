@@ -15,10 +15,10 @@ the signer.
 Web3Signer runs in one of two signing modes, and each mode serves one layer of Ethereum.
 Signing for both layers requires one instance per mode.
 
-| Mode | Signing keys | Layer | API | Slashing protection |
-| --- | --- | --- | --- | --- |
-| [`eth2`](../reference/cli/subcommands.md#eth2) | BLS12-381 | Consensus layer | [REST](../reference/api/rest.md) | Enabled by default |
-| [`eth1`](../reference/cli/subcommands.md#eth1) | secp256k1 | Execution layer | [JSON-RPC](../reference/api/json-rpc.md), [REST](../reference/api/rest.md) | Not applicable |
+| Mode                                           | Signing keys | Layer           | API                                                                        | Slashing protection |
+| ---------------------------------------------- | ------------ | --------------- | -------------------------------------------------------------------------- | ------------------- |
+| [`eth2`](../reference/cli/subcommands.md#eth2) | BLS12-381    | Consensus layer | [REST](../reference/api/rest.md)                                           | Enabled by default  |
+| [`eth1`](../reference/cli/subcommands.md#eth1) | secp256k1    | Execution layer | [JSON-RPC](../reference/api/json-rpc.md), [REST](../reference/api/rest.md) | Not applicable      |
 
 ### `eth2` mode (consensus layer)
 

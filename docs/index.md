@@ -42,42 +42,42 @@ Use it as a remote signer in distributed validator technology (DVT), such as
 ## Next steps
 
 <NextCards
-  items={[
-    {
-      title: "Architecture",
-      description:
-        "Learn how Web3Signer is structured, where signing keys live, and how multiple instances coordinate.",
-      path: "concepts/architecture",
-    },
-    {
-      title: "Store signing keys",
-      description:
-        "Compare files and external vaults for consensus layer and execution layer keys.",
-      path: "how-to/store-keys",
-    },
-    {
-      title: "Start Web3Signer",
-      description:
-        "Start Web3Signer for a consensus layer client or an execution layer client.",
-      path: "get-started/start-web3signer",
-    },
-    {
-      title: "Configure slashing protection",
-      description:
-        "Set up the PostgreSQL database that records consensus layer signing history.",
-      path: "how-to/configure-slashing-protection",
-    },
-    {
-      title: "Run Web3Signer at scale",
-      description:
-        "Size the service, balance load, and tune it for many signing keys.",
-      path: "how-to/run-at-scale",
-    },
-    {
-      title: "Key management best practices",
-      description:
-        "Apply the practices for consensus layer validator keys.",
-      path: "get-started/key-best-practices",
-    },
-  ]}
+items={[
+{
+title: "Architecture",
+description:
+"Learn how Web3Signer is structured, where signing keys live, and how multiple instances coordinate.",
+path: "concepts/architecture",
+},
+{
+title: "Store signing keys",
+description:
+"Compare files and external vaults for consensus layer and execution layer keys.",
+path: "how-to/store-keys",
+},
+{
+title: "Start Web3Signer",
+description:
+"Start Web3Signer for a consensus layer client or an execution layer client.",
+path: "get-started/start-web3signer",
+},
+{
+title: "Configure slashing protection",
+description:
+"Set up the PostgreSQL database that records consensus layer signing history.",
+path: "how-to/configure-slashing-protection",
+},
+{
+title: "Run Web3Signer at scale",
+description:
+"Size the service, balance load, and tune it for many signing keys.",
+path: "how-to/run-at-scale",
+},
+{
+title: "Key management best practices",
+description:
+"Apply the practices for consensus layer validator keys.",
+path: "get-started/key-best-practices",
+},
+]}
 />

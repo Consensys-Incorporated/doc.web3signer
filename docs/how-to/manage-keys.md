@@ -128,7 +128,7 @@ endpoint](https://consensys-incorporated.github.io/web3signer/#tag/Keymanager/op
 
   <TabItem value="curl request" label="curl request" default>
 
- ```bash
+```bash
 curl -X DELETE http://localhost:9000/eth/v1/keystores --data '{"pubkeys": ["0x93247f2209abcacf57b75a51dafae777f9dd38bc7053d1af526f220a7489a6d3a2753e5f3e8b1cfe39b56f43611df74a"]}'
 ```
 

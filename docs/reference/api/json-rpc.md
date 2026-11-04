@@ -1,5 +1,5 @@
 ---
-description: Use for signing execution layer payloads 
+description: Use for signing execution layer payloads
 sidebar_position: 1
 ---
 
@@ -11,9 +11,10 @@ import TabItem from '@theme/TabItem';
 <!-- markdownlint-disable-file -->
 
 :::note
+
 - All JSON-RPC HTTP examples use the default host and port endpoint `http://127.0.0.1:8545`.
 - The examples use Besu, but you can use any Ethereum execution client.
-:::
+  :::
 
 ## `eth_accounts`
 
@@ -102,17 +103,17 @@ Signs a transaction that you can submit to Besu at a later time using
 
 Transaction object:
 
-| Key | Type | Required/Optional | Value |
-| --- | :-- | --- | --- |
-| `from` | Data, 20&nbsp;bytes | Required | Address of the sender. |
-| `to` | Data, 20&nbsp;bytes | Optional for contract creation | Address of the receiver. `null` if this is a contract creation transaction. |
-| `gas` | Quantity | Optional | Gas provided by the sender. The default is `90000`. |
-| `gasPrice` | Quantity | Optional | Gas price provided by the sender in Wei. The default is `0`. Used only in non [EIP-1559] transactions. |
-| `maxPriorityFeePerGas` | Quantity | Optional | Maximum fee, in Wei, the sender is willing to pay above the base fee. Used only in [EIP-1559] transactions. |
-| `maxFeePerGas` | Quantity | Optional | Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay. Used only in [EIP-1559] transactions. |
-| `nonce` | Quantity | Optional | Number of transactions made by the sender before this one. |
-| `value` | Quantity | Optional | Value transferred in Wei. |
-| `data` | Quantity | Optional | Compiled contract code or hash of the invoked method signature and encoded parameters. |
+| Key                    | Type                | Required/Optional              | Value                                                                                                                    |
+| ---------------------- | :------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `from`                 | Data, 20&nbsp;bytes | Required                       | Address of the sender.                                                                                                   |
+| `to`                   | Data, 20&nbsp;bytes | Optional for contract creation | Address of the receiver. `null` if this is a contract creation transaction.                                              |
+| `gas`                  | Quantity            | Optional                       | Gas provided by the sender. The default is `90000`.                                                                      |
+| `gasPrice`             | Quantity            | Optional                       | Gas price provided by the sender in Wei. The default is `0`. Used only in non [EIP-1559] transactions.                   |
+| `maxPriorityFeePerGas` | Quantity            | Optional                       | Maximum fee, in Wei, the sender is willing to pay above the base fee. Used only in [EIP-1559] transactions.              |
+| `maxFeePerGas`         | Quantity            | Optional                       | Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay. Used only in [EIP-1559] transactions. |
+| `nonce`                | Quantity            | Optional                       | Number of transactions made by the sender before this one.                                                               |
+| `value`                | Quantity            | Optional                       | Value transferred in Wei.                                                                                                |
+| `data`                 | Quantity            | Optional                       | Compiled contract code or hash of the invoked method signature and encoded parameters.                                   |
 
 ### Returns
 
@@ -159,31 +160,31 @@ The JSON schema for the typed data structure to sign is:
 
 ```json
 {
-  type: 'object',
-  properties: {
-    types: {
-      type: 'object',
-      properties: {
-        EIP712Domain: {type: 'array'},
+  "type": "object",
+  "properties": {
+    "types": {
+      "type": "object",
+      "properties": {
+        "EIP712Domain": { "type": "array" }
       },
-      additionalProperties: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            name: {type: 'string'},
-            type: {type: 'string'}
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "type": { "type": "string" }
           },
-          required: ['name', 'type']
+          "required": ["name", "type"]
         }
       },
-      required: ['EIP712Domain']
+      "required": ["EIP712Domain"]
     },
-    primaryType: {type: 'string'},
-    domain: {type: 'object'},
-    message: {type: 'object'}
+    "primaryType": { "type": "string" },
+    "domain": { "type": "object" },
+    "message": { "type": "object" }
   },
-  required: ['types', 'primaryType', 'domain', 'message']
+  "required": ["types", "primaryType", "domain", "message"]
 }
 ```
 
@@ -232,17 +233,17 @@ Web3Signer submits the signed transaction to Besu using
 
 Transaction object:
 
-| Key | Type | Required/Optional | Value |
-| --- | :-- | --- | --- |
-| `from` | Data, 20&nbsp;bytes | Required | Address of the sender. |
-| `to` | Data, 20&nbsp;bytes | Optional for contract creation | Address of the receiver. `null` if this is a contract creation transaction. |
-| `gas` | Quantity | Optional | Gas provided by the sender. The default is `90000`. |
-| `gasPrice` | Quantity | Optional | Gas price provided by the sender in Wei. The default is `0`. Used only in non [EIP-1559] transactions. |
-| `maxPriorityFeePerGas` | Quantity | Optional | Maximum fee, in Wei, the sender is willing to pay above the base fee. Used only in [EIP-1559] transactions. |
-| `maxFeePerGas` | Quantity | Optional | Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay. Used only in [EIP-1559] transactions. |
-| `nonce` | Quantity | Optional | Number of transactions made by the sender before this one. |
-| `value` | Quantity | Optional | Value transferred in Wei. |
-| `data` | Quantity | Optional | Compiled contract code or hash of the invoked method signature and encoded parameters. |
+| Key                    | Type                | Required/Optional              | Value                                                                                                                    |
+| ---------------------- | :------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `from`                 | Data, 20&nbsp;bytes | Required                       | Address of the sender.                                                                                                   |
+| `to`                   | Data, 20&nbsp;bytes | Optional for contract creation | Address of the receiver. `null` if this is a contract creation transaction.                                              |
+| `gas`                  | Quantity            | Optional                       | Gas provided by the sender. The default is `90000`.                                                                      |
+| `gasPrice`             | Quantity            | Optional                       | Gas price provided by the sender in Wei. The default is `0`. Used only in non [EIP-1559] transactions.                   |
+| `maxPriorityFeePerGas` | Quantity            | Optional                       | Maximum fee, in Wei, the sender is willing to pay above the base fee. Used only in [EIP-1559] transactions.              |
+| `maxFeePerGas`         | Quantity            | Optional                       | Maximum total fee (base fee + priority fee), in Wei, the sender is willing to pay. Used only in [EIP-1559] transactions. |
+| `nonce`                | Quantity            | Optional                       | Number of transactions made by the sender before this one.                                                               |
+| `value`                | Quantity            | Optional                       | Value transferred in Wei.                                                                                                |
+| `data`                 | Quantity            | Optional                       | Compiled contract code or hash of the invoked method signature and encoded parameters.                                   |
 
 :::tip
 
