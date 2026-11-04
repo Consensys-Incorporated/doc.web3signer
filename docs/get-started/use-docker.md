@@ -19,6 +19,9 @@ Both include [Eclipse Temurin](https://adoptium.net/temurin/) JRE 25 and the sam
   Has no shell and no package manager, and runs as UID `65532`.
 
 Replace `<version>` with `latest` or a release tag.
+To build an image from the Web3Signer source, see
+[Building locally](https://github.com/Consensys-Incorporated/web3signer/blob/master/docker/README.md#building-locally)
+in the repository Docker README.
 
 ## Prerequisites
 
