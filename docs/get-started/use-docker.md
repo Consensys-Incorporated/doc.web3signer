@@ -11,6 +11,10 @@ import TabItem from '@theme/TabItem';
 
 Web3Signer publishes two Docker images.
 Both include [Eclipse Temurin](https://adoptium.net/temurin/) JRE 25 and the same Web3Signer application.
+Images before 26.10.2 trust the compromised eMudhra certificate authority roots.
+Use 26.10.2 or later.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
 
 - Ubuntu image (`consensys/web3signer:<version>`).
   Includes a shell and runs as the `web3signer` user.

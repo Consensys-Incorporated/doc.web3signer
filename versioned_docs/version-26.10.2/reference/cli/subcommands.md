@@ -86,6 +86,7 @@ eth1.aws-connection-cache-size: 5
 </Tabs>
 
 <!-- markdown-link-check-disable-next-line -->
+
 When [loading multiple keys from AWS Secrets Manager](../../how-to/store-keys/vaults/aws/secrets-manager-consensus-layer.md#cache-aws-secrets-manager-when-loading-multiple-keys),
 set to the maximum number of connections to cache.
 The default is `1`.
@@ -1211,6 +1212,12 @@ eth1.downstream-http-tls-ca-auth-enabled: false
 
 Enables or disables connections to servers with trusted CAs.
 The default is `true`.
+While `true`, Web3Signer accepts a server certificate signed by a certificate authority in the
+Java trust store, even when
+[`--downstream-http-tls-known-servers-file`](#downstream-http-tls-known-servers-file) is set.
+Set this option to `false` to accept only the fingerprints in that file.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
 
 #### `keystores-password-file`
 
@@ -2352,16 +2359,16 @@ match the [`--network` value of the connected Teku client](https://docs.teku.con
 
 Possible values are:
 
-| Network    | Chain            | Type       | Description                                      |
-| :--------- | :--------------- | :--------- | :----------------------------------------------- |
-| `mainnet`  | Consensus layer  | Production | Ethereum main network.                           |
-| `minimal`  | Consensus layer  | Test       | Used for local testing and development networks. |
-| `sepolia`  | Consensus layer  | Test       | Multi-client [permissioned](https://notes.ethereum.org/zvkfSmYnT0-uxwwEegbCqg) testnet.|
-| `holesky`  | Consensus layer  | Test       | Multi-client testnet.                            |
-| `hoodi`    | Consensus layer  | Test       | Multi-client testnet.                            |
-| `lukso`    | Consensus layer  | Production | Lukso main network.                              |
-| `gnosis`   | Consensus layer  | Production | Gnosis main network.                             |
-| `chiado`   | Consensus layer  | Test       | Multi-client Gnosis testnet.                     |
+| Network   | Chain           | Type       | Description                                                                             |
+| :-------- | :-------------- | :--------- | :-------------------------------------------------------------------------------------- |
+| `mainnet` | Consensus layer | Production | Ethereum main network.                                                                  |
+| `minimal` | Consensus layer | Test       | Used for local testing and development networks.                                        |
+| `sepolia` | Consensus layer | Test       | Multi-client [permissioned](https://notes.ethereum.org/zvkfSmYnT0-uxwwEegbCqg) testnet. |
+| `holesky` | Consensus layer | Test       | Multi-client testnet.                                                                   |
+| `hoodi`   | Consensus layer | Test       | Multi-client testnet.                                                                   |
+| `lukso`   | Consensus layer | Production | Lukso main network.                                                                     |
+| `gnosis`  | Consensus layer | Production | Gnosis main network.                                                                    |
+| `chiado`  | Consensus layer | Test       | Multi-client Gnosis testnet.                                                            |
 
 #### `proxy-keystores-password-file`
 

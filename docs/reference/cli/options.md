@@ -1240,6 +1240,21 @@ tls-allow-ca-clients
 
 Allows clients signed with trusted CA certificates to connect.
 
+:::warning CA compromise risk
+
+This option trusts any client certificate that chains to a certificate authority in the Java
+trust store, including public CAs.
+Docker images before 26.10.2 trust the compromised eMudhra roots.
+Images from 26.10.2 onward do not.
+A binary install uses the Java runtime on the host, so update that runtime before relying on this
+option.
+On any version, prefer [`--tls-known-clients-file`](#tls-known-clients-file), which does not use
+the Java trust store.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
+
+:::
+
 ### `vertx-worker-pool-size`
 
 <Tabs>
