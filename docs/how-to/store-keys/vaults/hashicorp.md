@@ -100,6 +100,11 @@ vault kv put secret/web3signerSigningKey value=17079f966aa2d5db1678ed32467165bbb
 
 The known servers file is required if TLS is enabled, to disable TLS set
 [`tlsEnabled`](../../../reference/key-config-file-params.md#hashicorp-vault) to `false`.
+`tlsKnownServersPath` still accepts a certificate signed by a certificate authority in the Java
+trust store.
+Web3Signer has no option to turn that off.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
 
 Specify the location of the known servers file in the
 [`tlsKnownServersPath`](../../../reference/key-config-file-params.md#hashicorp-vault) option of the

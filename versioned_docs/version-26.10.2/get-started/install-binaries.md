@@ -19,6 +19,11 @@ Web3Signer requires Java 25 or later releases.
 
 :::
 
+The binary uses this Java trust store.
+Update Java so it no longer trusts the compromised eMudhra roots.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
+
 ## Install binaries
 
 Download the Web3Signer [packaged binaries](https://github.com/Consensys-Incorporated/web3signer/releases/latest).

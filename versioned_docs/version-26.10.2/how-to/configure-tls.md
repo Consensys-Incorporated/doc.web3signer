@@ -12,7 +12,6 @@ curl) and Web3Signer to communicate securely.
 Web3Signer provides multiple options to configure client TLS access:
 
 - Specify one or more authorized clients using a [known clients file](#create-the-known-clients-file).
-- [Allow all clients with trusted CA certificates to connect].
 - [Allow any client to connect].
 
 This example uses a known clients file to limit access to specified clients.
@@ -80,12 +79,19 @@ The command line:
 
 :::note
 Use the [`--tls-allow-any-client`](../reference/cli/options.md#tls-allow-any-client) option to allow
-access to any client, or [`--tls-allow-ca-clients`](../reference/cli/options.md#tls-allow-ca-clients)
-to allow access to any client with a trusted CA certificate.
+any client to connect.
 
 You can't use [`--tls-allow-any-client`](../reference/cli/options.md#tls-allow-any-client) with
-[`tls-known-clients-file`](../reference/cli/options.md#tls-known-clients-file) or
+[`--tls-known-clients-file`](../reference/cli/options.md#tls-known-clients-file) or
 [`--tls-allow-ca-clients`](../reference/cli/options.md#tls-allow-ca-clients).
+:::
+
+:::warning CA compromise risk
+
+[`--tls-allow-ca-clients`](../reference/cli/options.md#tls-allow-ca-clients) trusts any client
+certificate that chains to a certificate authority in the Java trust store.
+See the warning on that option.
+
 :::
 
 ## Server TLS connection
@@ -125,7 +131,8 @@ Specify both hostname and IP address in the file if unsure which is used in requ
 web3signer eth1 --downstream-http-tls-enabled \
 --downstream-http-tls-keystore-file=/Users/me/my_node/keystore.pfx \
 --downstream-http-tls-keystore-password-file=/Users/me/my_node/keyPassword \
---downstream-http-tls-known-servers-file=/Users/me/my_node/knownServers
+--downstream-http-tls-known-servers-file=/Users/me/my_node/knownServers \
+--downstream-http-tls-ca-auth-enabled=false
 ```
 
 The command line:
@@ -138,15 +145,22 @@ The command line:
   [`--downstream-http-tls-keystore-password-file`](../reference/cli/subcommands.md#downstream-http-tls-keystore-password-file) option.
 - [Specifies the servers](#create-the-known-servers-file) to connect to using the
   [`--downstream-http-tls-known-servers-file`](../reference/cli/subcommands.md#downstream-http-tls-known-servers-file) option.
+- Accepts only those servers by setting
+  [`--downstream-http-tls-ca-auth-enabled`](../reference/cli/subcommands.md#downstream-http-tls-ca-auth-enabled)
+  to `false`.
 
 :::note
-The [`--downstream-http-tls-ca-auth-enabled`](../reference/cli/subcommands.md#downstream-http-tls-ca-auth-enabled)
-option is `true` by default and allows connections to servers with trusted root CAs.
+[`--downstream-http-tls-ca-auth-enabled`](../reference/cli/subcommands.md#downstream-http-tls-ca-auth-enabled)
+is `true` by default.
+While it is `true`, Web3Signer accepts a server certificate signed by a certificate authority in
+the Java trust store, even when the known servers file is set.
+Set it to `false` to accept only the fingerprints in that file.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
 :::
 
 <!-- links -->
 
-[Allow all clients with trusted CA certificates to connect]: ../reference/cli/options.md#tls-allow-ca-clients
 [Allow any client to connect]: ../reference/cli/options.md#tls-allow-any-client
 [Teku]: https://docs.teku.consensys.com/
 [Teku tutorial]: https://docs.teku.consensys.com/tutorials/configure-external-signer-tls

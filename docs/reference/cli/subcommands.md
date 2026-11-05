@@ -1212,6 +1212,12 @@ eth1.downstream-http-tls-ca-auth-enabled: false
 
 Enables or disables connections to servers with trusted CAs.
 The default is `true`.
+While `true`, Web3Signer accepts a server certificate signed by a certificate authority in the
+Java trust store, even when
+[`--downstream-http-tls-known-servers-file`](#downstream-http-tls-known-servers-file) is set.
+Set this option to `false` to accept only the fingerprints in that file.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
 
 #### `keystores-password-file`
 
