@@ -12,6 +12,7 @@ import DocItemContent from "@theme/DocItem/Content";
 import DocBreadcrumbs from "@theme/DocBreadcrumbs";
 import ContentVisibility from "@theme/ContentVisibility";
 import CopyPageButton from "docusaurus-plugin-copy-page-button/src/CopyPageButton";
+import ApiStore from "../ApiStore";
 import styles from "./styles.module.css";
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -34,7 +35,12 @@ function useDocTOC() {
 }
 export default function DocItemLayout({ children }) {
   const docTOC = useDocTOC();
-  const { metadata } = useDoc();
+  const { metadata, frontMatter } = useDoc();
+  const content = frontMatter.api ? (
+    <ApiStore api={frontMatter.api}>{children}</ApiStore>
+  ) : (
+    children
+  );
   return (
     <div className="row">
       <div className={clsx("col", !docTOC.hidden && styles.docItemCol)}>
@@ -48,7 +54,7 @@ export default function DocItemLayout({ children }) {
             </div>
             <DocVersionBadge />
             {docTOC.mobile}
-            <DocItemContent>{children}</DocItemContent>
+            <DocItemContent>{content}</DocItemContent>
             <DocItemFooter />
           </article>
           <DocItemPaginator />
