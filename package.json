@@ -20,7 +20,9 @@
     "lint:fix": "npm run lint:js -- --fix",
     "format:docs": "prettier --write \"docs/**/*.{md,mdx}\"",
     "format:docs:check": "prettier --check \"docs/**/*.{md,mdx}\"",
-    "prepare": "node scripts/husky-prepare.js"
+    "prepare": "node scripts/husky-prepare.js",
+    "gen-api-docs": "docusaurus gen-api-docs all",
+    "clean-api-docs": "docusaurus clean-api-docs all"
   },
   "lint-staged": {
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
@@ -40,6 +42,8 @@
     "clsx": "^2.1.1",
     "docusaurus-plugin-copy-page-button": "^0.5.0",
     "docusaurus-plugin-llms": "^0.4.0",
+    "docusaurus-plugin-openapi-docs": "^5.2.0",
+    "docusaurus-theme-openapi-docs": "^5.2.0",
     "open-ask-ai": "^0.7.3",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
@@ -52,6 +56,7 @@
     "@docusaurus/module-type-aliases": "^3.10.1",
     "@docusaurus/tsconfig": "^3.10.1",
     "@docusaurus/types": "^3.10.1",
+    "@redocly/cli": "^2.12.6",
     "@typescript-eslint/parser": "^6.13.1",
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",

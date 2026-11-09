@@ -1,0 +1,88 @@
+---
+name: Sync OpenAPI specs
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # Daily at 2 AM UTC
+  workflow_dispatch: {}
+
+concurrency:
+  group: sync-openapi-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Sync OpenAPI specs from Web3Signer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch OpenAPI specs from Web3Signer
+        run: |
+          mkdir -p src/openapi-specs
+          # Clone only the openapi-specs directory using sparse checkout
+          git clone --depth 1 --filter=blob:none --sparse \
+            https://github.com/Consensys-Incorporated/web3signer.git temp-web3signer
+          cd temp-web3signer
+          git sparse-checkout set openapi-specs
+          cd ..
+
+          # Copy the specs to the build-time directory used by the docs generator
+          rm -rf src/openapi-specs/eth1 src/openapi-specs/eth2
+          cp -r temp-web3signer/openapi-specs/eth1 src/openapi-specs/
+          cp -r temp-web3signer/openapi-specs/eth2 src/openapi-specs/
+
+          # Cleanup
+          rm -rf temp-web3signer
+
+      - name: Bundle OpenAPI specs
+        run: |
+          node src/scripts/normalize_openapi_servers.cjs
+          npx --yes @redocly/cli@2.12.6 bundle src/openapi-specs/eth2/web3signer.yaml -o src/openapi-specs/eth2-bundled.yaml
+          npx --yes @redocly/cli@2.12.6 bundle src/openapi-specs/eth1/web3signer.yaml -o src/openapi-specs/eth1-bundled.yaml
+
+      - name: Generate API documentation
+        run: |
+          npm run clean-api-docs
+          npm run gen-api-docs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet docs/reference/api/; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync OpenAPI specs from web3signer"
+          title: "chore: Sync OpenAPI specs from Web3Signer"
+          body: |
+            This PR updates the OpenAPI specifications from the [Web3Signer repository](https://github.com/Consensys-Incorporated/web3signer).
+            Changes were detected in the OpenAPI specs and the API documentation has been regenerated.
+          branch: chore/sync-openapi-specs
+          base: main
+          delete-branch: true
+          labels: |
+            documentation
+            automated
+          team-reviewers: |
+            protocol-pliny
+

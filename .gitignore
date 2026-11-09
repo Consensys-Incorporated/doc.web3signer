@@ -9,6 +9,11 @@
 .cache-loader
 .idea
 
+# OpenAPI specs fetched from the Web3Signer repository and bundled at generation time
+src/openapi-specs/eth1/
+src/openapi-specs/eth2/
+src/openapi-specs/*-bundled.yaml
+
 # Misc
 .DS_Store
 .env.local
