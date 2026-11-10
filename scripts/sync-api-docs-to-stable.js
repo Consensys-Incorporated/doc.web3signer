@@ -2,8 +2,9 @@
 /**
  * Point every docs version at the one REST API reference.
  *
- * `gen-api-docs` writes the operation pages to `docs/reference/api/`. The API
- * reference is not versioned: stable and development both serve those files.
+ * `gen-api-docs` writes the operation pages to `docs/reference/api/` at build
+ * time. Those pages are gitignored. The API reference is not versioned: stable
+ * and development both serve those files.
  * Each snapshot under versioned_docs gets a symlink for eth1 and eth2 instead
  * of its own copy. A later `docs:version` copies
  * `docs/` into the new snapshot; running this again replaces that copy with a

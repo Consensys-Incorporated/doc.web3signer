@@ -1,43 +1,41 @@
 # OpenAPI specifications
 
-This directory contains OpenAPI specifications synced from the [Web3Signer repository](https://github.com/Consensys-Incorporated/web3signer).
+The REST API reference is generated from the OpenAPI specs in the
+[Web3Signer repository](https://github.com/Consensys-Incorporated/web3signer)
+(`openapi-specs/eth1` and `openapi-specs/eth2`). Nothing in this directory except this file is
+committed.
 
-> **Note:** These specs are in `src/` because they are only used at build time to generate the API documentation. They are not included in the final site output.
+## How the specs are fetched
 
-## Files
+`npm start` and `npm run build` run `npm run gen-api-docs`, which first runs
+`scripts/fetch-openapi-specs.js`. The script:
 
-- `eth2/` - Original ETH2 OpenAPI spec files (synced from Web3Signer)
-- `eth1/` - Original ETH1 OpenAPI spec files (synced from Web3Signer)
-- `eth2-bundled.yaml` - Bundled ETH2 spec with all `$ref` resolved
-- `eth1-bundled.yaml` - Bundled ETH1 spec with all `$ref` resolved
+1. Fetches `openapi-specs/` from Web3Signer at the tag that matches `lastVersion` in
+   `docusaurus.config.js`.
+2. Normalizes the `servers` list (`src/scripts/normalize_openapi_servers.cjs`).
+3. Bundles each spec with Redocly into `eth1-bundled.yaml` and `eth2-bundled.yaml`.
 
-## Syncing
+If the bundles already match the requested tag, the fetch is skipped, so `npm start` works
+offline after the first run.
 
-These files are automatically synced from the Web3Signer repository via the `sync-openapi.yml` GitHub Action workflow.
+To preview the reference from another tag, branch, or commit, set `WEB3SIGNER_SPEC_REF`:
 
-To manually sync:
+```bash
+WEB3SIGNER_SPEC_REF=master npm start
+```
 
-1. Run the workflow from the Actions tab, or
-2. Run locally (fetch + normalize + bundle + regenerate):
+## Updating the API reference
 
-   ```bash
-   # From the repo root
-   cd doc.web3signer
-
-   # One-shot manual sync (fetches from upstream, normalizes servers, bundles, cleans, regenerates)
-   node src/scripts/manual_sync_openapi.cjs
-   ```
-
-> Note: `src/openapi-specs/**` is intentionally ignored by git (build-time input only). The committed output is `docs/reference/api/**`.
+Freeze the docs version and bump `lastVersion`. The next build fetches the specs for that release.
 
 ## Generated documentation
 
-The generated API documentation is output to:
+`gen-api-docs` writes the operation pages to:
 
 - `docs/reference/api/eth2/` - Consensus layer API docs
 - `docs/reference/api/eth1/` - Execution layer API docs
 
-The API reference is not versioned. `npm run gen-api-docs` then runs
+Those pages are gitignored. The API reference is not versioned. `gen-api-docs` then runs
 `scripts/sync-api-docs-to-stable.js`, which links `eth1` and `eth2` in every
 `versioned_docs/version-*/reference/api/` directory at those folders. Stable and development
 serve the same pages. The Markdown files agents fetch (`.md` URLs) are written at build time by

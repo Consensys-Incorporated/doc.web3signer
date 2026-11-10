@@ -58,7 +58,9 @@ Markdown is served at `/development/...md` and is not added to the index.
 
 Editing `docs/` does not change `llms.txt`, `llms-full.txt`, or the stable raw `.md` exports
 until that version is frozen and `lastVersion` is bumped. The REST API reference is the exception:
-it is not versioned. `npm run gen-api-docs` writes it to `docs/reference/api/` and links
+it is not versioned, and neither its specs nor its operation pages are committed. `npm start`
+and `npm run build` run `gen-api-docs`, which fetches the OpenAPI specs from the Web3Signer tag
+that matches `lastVersion`, writes the pages into `docs/reference/api/`, and links
 `versioned_docs/version-*/reference/api/eth1` and `eth2` at that tree, so every docs version
 serves the same API pages.
 

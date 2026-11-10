@@ -2,8 +2,9 @@ const fs = require("fs");
 const lightCodeTheme = require("prism-react-renderer").themes.github;
 const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
-// OpenAPI plugin configuration. The specs are fetched from the Web3Signer repository
-// and bundled at generation time, and the pages land under docs/reference/api/**.
+// OpenAPI plugin configuration. npm run gen-api-docs fetches the specs from the
+// Web3Signer tag that matches lastVersion, bundles them into src/openapi-specs, and
+// writes the pages under docs/reference/api. None of those files are committed.
 const openApiConfig = {
   eth2Api: {
     specPath: "src/openapi-specs/eth2-bundled.yaml",
