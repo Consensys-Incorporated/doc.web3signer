@@ -416,7 +416,15 @@ h4 {
    caret offset, so the nudge is per label. */
 .openapi-markdown__details > summary > .openapi-schema__container {
   position: relative;
-  top: 3px;
+  top: 4px;
+}
+
+/* Uppercase discriminator labels sit high in the line box, so the
+   pill outline looks low around the word. */
+.openapi-tabs__discriminator-tab-label,
+.openapi-tabs__schema-label {
+  position: relative;
+  top: 2px;
 }
 
 .openapi-markdown__details.response
