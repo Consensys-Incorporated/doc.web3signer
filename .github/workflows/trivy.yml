@@ -1,10 +1,15 @@
 ---
 name: Trivy
 
+# Scan the default branch so results are reported as code scanning alerts in the
+# Security tab rather than as pull request annotations.
 on:
-  pull_request:
+  push:
     branches:
       - main
+  schedule:
+    - cron: "0 2 * * 1" # Mondays, after the 01:00 UTC database cache refresh
+  workflow_dispatch:
 
 permissions: {} # lock everything by default (least-privilege)
 
@@ -15,6 +20,10 @@ jobs:
     permissions:
       contents: read
       security-events: write
+    env:
+      # The shared action checks out its own repository into .github-actions;
+      # scan this repository only.
+      TRIVY_SKIP_DIRS: .github-actions
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
