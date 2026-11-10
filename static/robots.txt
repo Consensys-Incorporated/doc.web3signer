@@ -18,4 +18,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://docs.web3signer.consensys.io/sitemap.xml
+Sitemap: https://docs.web3signer.consensys.com/sitemap.xml

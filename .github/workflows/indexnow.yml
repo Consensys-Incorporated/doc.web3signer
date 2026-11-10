@@ -4,6 +4,8 @@ on:
     - cron: '0 11 * * 0'
   workflow_dispatch:
 
+permissions: {} # lock everything by default (least-privilege)
+
 jobs:
   indexnow:
     environment: analytics
@@ -12,7 +14,7 @@ jobs:
       - name: Submit to IndexNow
         uses: bojieyang/indexnow-action@38ddfbd93579a8a44c0dee662121bf9d51098f71 # 3.0.0
         with:
-          sitemap-location: 'https://docs.web3signer.consensys.io/sitemap.xml'
+          sitemap-location: 'https://docs.web3signer.consensys.com/sitemap.xml'
           key: ${{ secrets.INDEXNOW_APIKEY }}
           since: 7
           since-unit: 'day'

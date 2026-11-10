@@ -6,7 +6,7 @@ import Heading from '@theme/Heading'
 type CardItem = {
   title: string;
   link: string;
-  description: JSX.Element;
+  description: React.JSX.Element;
   buttonName: string;
   buttonType:
     | "primary"
@@ -73,7 +73,7 @@ function Card({ title, link, description, buttonName, buttonType }: CardItem) {
   );
 }
 
-export default function HomepageCards(): JSX.Element {
+export default function HomepageCards(): React.JSX.Element {
   return (
     <section className={clsx("margin-top--lg", "margin-bottom--lg")}>
       <div className="container">

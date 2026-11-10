@@ -11,15 +11,17 @@ on:
     #   - '.github/workflows/**'
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {} # lock everything by default (least-privilege)
 
 jobs:
   renovatebot-check:
     runs-on: ubuntu-24.04
     environment: security
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run renovatebot
         uses: Consensys-Incorporated/github-actions/renovatebot@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0

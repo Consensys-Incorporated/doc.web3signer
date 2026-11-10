@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Multiple Web3Signer instances behind a load balancer, sharing one slashing
+  protection database.
+
+  Referenced from Markdown with image syntax, so the SVG renders in isolation and
+  carries its own font stack and frame background rather than inheriting page
+  styles. Cylinder labels are centred on the body below the top rim, not on the
+  whole shape, because the rim reads as a lid.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     font-family="Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 700 562">
+  <rect x="0" y="0" width="700" height="562" fill="#f6f6f6" />
+
+  <!-- Validator clients -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="150" y="40" width="160" height="70" rx="2" />
+    <rect x="390" y="40" width="160" height="70" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="230" y="80">Validator client</text>
+    <text x="470" y="80">Validator client</text>
+  </g>
+
+  <!-- Load balancer -->
+  <rect x="230" y="170" width="240" height="60" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="350" y="205" fill="#1c1e21" font-size="15"
+        text-anchor="middle">Load balancer</text>
+
+  <!-- Web3Signer instances -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="60" y="300" width="160" height="70" rx="2" />
+    <rect x="270" y="300" width="160" height="70" rx="2" />
+    <rect x="480" y="300" width="160" height="70" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="140" y="340">Web3Signer</text>
+    <text x="350" y="340">Web3Signer</text>
+    <text x="560" y="340">Web3Signer</text>
+  </g>
+
+  <!-- Shared slashing protection database -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M250,462 a100,12 0 0 1 200,0 v68 a100,12 0 0 1 -200,0 z" />
+    <path d="M250,462 a100,12 0 0 0 200,0" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="350" y="503">Slashing protection</text>
+    <text x="350" y="523">database</text>
+  </g>
+
+  <!-- Edges: each line leaves a box centre and stops short of its target -->
+  <g stroke="#4a4f6a" stroke-width="2" fill="none">
+    <!-- clients into the load balancer -->
+    <line x1="230" y1="110" x2="230" y2="140" />
+    <line x1="470" y1="110" x2="470" y2="140" />
+    <line x1="230" y1="140" x2="470" y2="140" />
+    <line x1="350" y1="140" x2="350" y2="167" />
+    <!-- load balancer out to each instance -->
+    <line x1="350" y1="230" x2="350" y2="270" />
+    <line x1="140" y1="270" x2="560" y2="270" />
+    <line x1="140" y1="270" x2="140" y2="297" />
+    <line x1="350" y1="270" x2="350" y2="297" />
+    <line x1="560" y1="270" x2="560" y2="297" />
+    <!-- instances into the shared database -->
+    <line x1="140" y1="370" x2="140" y2="410" />
+    <line x1="350" y1="370" x2="350" y2="410" />
+    <line x1="560" y1="370" x2="560" y2="410" />
+    <line x1="140" y1="410" x2="560" y2="410" />
+    <line x1="350" y1="410" x2="350" y2="447" />
+  </g>
+  <g fill="#4a4f6a">
+    <path d="M345,158 L355,158 L350,167 z" />
+    <path d="M135,288 L145,288 L140,297 z" />
+    <path d="M345,288 L355,288 L350,297 z" />
+    <path d="M555,288 L565,288 L560,297 z" />
+    <path d="M345,438 L355,438 L350,447 z" />
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Web3Signer in eth2 mode.
+
+  Referenced from Markdown with image syntax, so the SVG renders in isolation and
+  carries its own font stack and frame background rather than inheriting page
+  styles. Cylinder labels are centred on the body below the top rim, not on the
+  whole shape, because the rim reads as a lid.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     font-family="Roboto, Helvetica, Arial, sans-serif" viewBox="0 0 494 400">
+  <rect x="0" y="0" width="494" height="400" fill="#f6f6f6" />
+
+  <!-- Instance -->
+  <rect x="24" y="106" width="446" height="134" rx="2" fill="#dfe6fb"
+        stroke="#aab2d4" stroke-width="2" stroke-dasharray="6 4" />
+  <text x="446" y="130" fill="#4a4f6a" font-size="14" text-anchor="end">Web3Signer instance in eth2 mode</text>
+
+  <!-- Validator client -->
+  <rect x="24" y="24" width="170" height="64" rx="2"
+        fill="#ffffff" stroke="#3655d5" stroke-width="2" />
+  <text x="109" y="62" fill="#1c1e21" font-size="15" text-anchor="middle">Validator client</text>
+
+  <!-- Instance components -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <rect x="48" y="146" width="122" height="70" rx="2" />
+    <rect x="186" y="146" width="122" height="70" rx="2" />
+    <rect x="324" y="146" width="122" height="70" rx="2" />
+  </g>
+  <g fill="#1c1e21" font-size="14" text-anchor="middle">
+    <text x="109" y="176">Consensus</text>
+    <text x="109" y="194">REST API</text>
+    <text x="247" y="176">Loaded keys</text>
+    <text x="247" y="194">in memory</text>
+    <text x="385" y="176">Reload keys and</text>
+    <text x="385" y="194">key manager API</text>
+  </g>
+
+  <!-- Slashing protection database -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M24,300 a85,12 0 0 1 170,0 v64 a85,12 0 0 1 -170,0 z" />
+    <path d="M24,300 a85,12 0 0 0 170,0" fill="none" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="109" y="338">Slashing protection</text>
+    <text x="109" y="358">database</text>
+  </g>
+
+  <!-- Key store -->
+  <g fill="#ffffff" stroke="#3655d5" stroke-width="2">
+    <path d="M208,300 a72,12 0 0 1 144,0 v64 a72,12 0 0 1 -144,0 z" />
+    <path d="M208,300 a72,12 0 0 0 144,0" fill="none" />
+  </g>
+  <g fill="#1c1e21" font-size="15" text-anchor="middle">
+    <text x="280" y="338">Key store:</text>
+    <text x="280" y="358">files or vault</text>
+  </g>
+
+  <g stroke="#4a4f6a" stroke-width="2" fill="none">
+    <line x1="109" y1="88" x2="109" y2="137" />
+    <line x1="186" y1="181" x2="179" y2="181" />
+    <line x1="324" y1="181" x2="317" y2="181" />
+    <line x1="109" y1="216" x2="109" y2="279" />
+    <line x1="280" y1="288" x2="280" y2="225" />
+  </g>
+
+  <g fill="#4a4f6a">
+    <path d="M104,137 L114,137 L109,146 z" />
+    <path d="M179,176 L179,186 L170,181 z" />
+    <path d="M317,176 L317,186 L308,181 z" />
+    <path d="M104,279 L114,279 L109,288 z" />
+    <path d="M275,225 L285,225 L280,216 z" />
+  </g>
+
+  <text x="117" y="102" fill="#4a4f6a" font-size="13">REST</text>
+</svg>

@@ -71,7 +71,7 @@ the network used by the Teku client.
 If you are running Web3Signer `eth2` mode on a public testnet, then you must specify the `network` option.
 It's important that this network matches the one you set up for your validator client.
 For example, if you have [Teku set up to run on
-Holesky](https://docs.teku.consensys.net/get-started/connect/testnet#sync-the-execution-layer-network)
+Holesky](https://docs.teku.consensys.com/get-started/connect/testnet#sync-the-execution-layer-network)
 then you must configure Web3Signer with the Holesky network under the `eth2` subcommand, as in the
 following example.
 
@@ -110,7 +110,7 @@ Web3Signer by default also performs a health check on the
 <!-- Links -->
 
 [Signing key configuration files]: ../how-to/load-keys.md#use-key-configuration-files
-[Teku]: https://docs.teku.consensys.net/how-to/use-external-signer/use-web3signer
+[Teku]: https://docs.teku.consensys.com/how-to/use-external-signer/use-web3signer
 [subcommand]: ../reference/cli/subcommands.md
 [bulk load signing keys]: ../how-to/load-keys.md#bulk-load-keys
 [slashing protection]: ../concepts/slashing-protection.md

@@ -7,7 +7,7 @@ const config = {
   title: "Consensys Web3Signer",
   tagline:
     "An open-source, client-agnostic, Ethereum signing service written in Java that is capable of signing on multiple platforms.",
-  url: "https://docs.web3signer.consensys.io",
+  url: "https://docs.web3signer.consensys.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
   markdown: {
@@ -55,7 +55,7 @@ const config = {
           showLastUpdateAuthor: false,
           showLastUpdateTime: false,
           includeCurrentVersion: true,
-          lastVersion: "26.7.0",
+          lastVersion: "26.10.2",
           versions: {
             //defaults to the ./docs folder
             // using 'development' instead of 'next' as path
@@ -64,8 +64,8 @@ const config = {
               path: "development",
             },
             //the last stable release in the versioned_docs/version-1.0
-            "26.7.0": {
-              label: "stable (26.7.0)",
+            "26.10.2": {
+              label: "stable (26.10.2)",
             },
           },
         },
@@ -224,7 +224,7 @@ const config = {
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} Consensys, Inc.`,
+        copyright: `© ${new Date().getFullYear()} Consensys Incorporated`,
       },
       prism: {
         theme: lightCodeTheme,

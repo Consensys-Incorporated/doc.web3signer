@@ -1,6 +1,10 @@
 ---
 description: Required spelling and casing for Web3Signer product names and related Ethereum terms.
-globs: ["**/*.md", "**/*.mdx"]
+globs:
+  - "**/*.md"
+  - "**/*.mdx"
+  - .github/vale/**
+  - .github/workflows/spelling.yml
 alwaysApply: false
 ---
 
@@ -19,6 +23,7 @@ Do not use listed variants unless they appear in code, URLs, or direct quotation
 | Ethereum mainnet      | Mainnet (without "Ethereum" on first mention) |
 | validator key         | validator private key (unless distinction needed) |
 | TLS                   | tls (except in code/config snippets)          |
+| consensus layer       | Ethereum 2.0 (except when explaining that it is the former name) |
 
 ## Standards and specifications
 
@@ -29,3 +34,14 @@ Examples:
 
 - First use: "Ethereum Improvement Proposal 2335 (EIP-2335)"
 - Subsequent: "EIP-2335"
+
+## Spelling
+
+Pull requests run Vale spelling. A warning means Vale does not recognize a word in a
+changed documentation file.
+
+- If the word is a typo, correct it in the documentation.
+- If the word is a real term this change introduces, add one pattern to
+  `.github/vale/accept.txt` in the same pull request. Vale treats each line as a
+  case-sensitive regular expression. Include plurals and possessives in the pattern
+  when the page uses them, for example `Openfort(?:'s)?`.

@@ -31,11 +31,11 @@ keyType: "SECP256K1"
 privateKey: "0x25b1166a43c109cb330af8945d364722757c65ed2bfed5444b5a2f057f82d391"
 ```
 
-| Key | Description |
-| --- | --- |
-| **type** | Type of configuration file. Use `file-raw`. |
-| **keyType** | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`. |
-| **privateKey** | Hexadecimal encoded private key string. |
+| Key            | Description                                                                     |
+| -------------- | ------------------------------------------------------------------------------- |
+| **type**       | Type of configuration file. Use `file-raw`.                                     |
+| **keyType**    | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`. |
+| **privateKey** | Hexadecimal encoded private key string.                                         |
 
 ## Keystore file
 
@@ -48,12 +48,12 @@ keystoreFile: "95e57532ede3c1dd879061153f9cfdcdefa9dc5fb9c954a6677bc6641b8d26e39
 keystorePasswordFile: "95e57532ede3c1dd879061153f9cfdcdefa9dc5fb9c954a6677bc6641b8d26e39f70b660bbaa732c47277c0096e11400.password"
 ```
 
-| Key | Description |
-| --- | --- |
-| **type** | Type of configuration file. Use `file-keystore`. |
-| **keyType** | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`. |
-| **keystoreFile** | Location of the keystore file. |
-| **keystorePasswordFile** | Text file containing the password to decrypt the keystore file. |
+| Key                      | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| **type**                 | Type of configuration file. Use `file-keystore`.                                |
+| **keyType**              | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`. |
+| **keystoreFile**         | Location of the keystore file.                                                  |
+| **keystorePasswordFile** | Text file containing the password to decrypt the keystore file.                 |
 
 ## HashiCorp Vault
 
@@ -103,23 +103,23 @@ kubernetesRole: "web3signer-role"
   </TabItem>
 </Tabs>
 
-| Key | Description |
-| --- | --- |
-| **type** | Type of configuration file. Use `hashicorp`. |
-| **keyType** | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`. |
-| **tlsEnabled** | Enable or disable TLS. The default is `true`. |
-| **keyPath** | Path to secret in the HashiCorp Vault containing the private key. Syntax is the same as the path used in [HashiCorp KV Secrets Engine Version 2 HTTP API](https://www.vaultproject.io/api-docs/secret/kv/kv-v2#read-secret-version) |
-| **keyName** | Name of the key storing the private key in the vault. |
-| **tlsKnownServersPath** | Path to the file containing a list of trusted HashiCorp Vault servers. |
-| **serverHost** | Host of the HashiCorp Vault server. |
-| **serverPort** | Port of the HashiCorp Vault server. |
-| **timeout** | Timeout in milliseconds for requests to the HashiCorp Vault server. |
-| **authMethod** | Authentication method used to access HashiCorp Vault. Valid options are `TOKEN` and `KUBERNETES`. The default is `TOKEN`. |
-| **token** | The root token displayed by the HashiCorp Vault server. Required when `authMethod` is `TOKEN`. |
-| **kubernetesRole** | Vault role bound to the pod's Kubernetes service account. Required when `authMethod` is `KUBERNETES`. |
-| **kubernetesAuthPath** | Vault authentication mount path used for the `KUBERNETES` authentication method. The default is `kubernetes`. |
-| **kubernetesServiceAccountTokenPath** | Path to the file containing the Kubernetes service account token. The default is `/var/run/secrets/kubernetes.io/serviceaccount/token`. Relative paths are resolved relative to the signing key configuration file directory. |
-| **httpProtocolVersion** | Override HTTP protocol version that is used to connect to HashiCorp Vault. Valid values are `HTTP_2` and `HTTP_1_1`. The default is `HTTP_2`. |
+| Key                                   | Description                                                                                                                                                                                                                         |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **type**                              | Type of configuration file. Use `hashicorp`.                                                                                                                                                                                        |
+| **keyType**                           | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `BLS`.                                                                                                                                                     |
+| **tlsEnabled**                        | Enable or disable TLS. The default is `true`.                                                                                                                                                                                       |
+| **keyPath**                           | Path to secret in the HashiCorp Vault containing the private key. Syntax is the same as the path used in [HashiCorp KV Secrets Engine Version 2 HTTP API](https://www.vaultproject.io/api-docs/secret/kv/kv-v2#read-secret-version) |
+| **keyName**                           | Name of the key storing the private key in the vault.                                                                                                                                                                               |
+| **tlsKnownServersPath**               | Path to the file containing a list of trusted HashiCorp Vault servers.                                                                                                                                                              |
+| **serverHost**                        | Host of the HashiCorp Vault server.                                                                                                                                                                                                 |
+| **serverPort**                        | Port of the HashiCorp Vault server.                                                                                                                                                                                                 |
+| **timeout**                           | Timeout in milliseconds for requests to the HashiCorp Vault server.                                                                                                                                                                 |
+| **authMethod**                        | Authentication method used to access HashiCorp Vault. Valid options are `TOKEN` and `KUBERNETES`. The default is `TOKEN`.                                                                                                           |
+| **token**                             | The root token displayed by the HashiCorp Vault server. Required when `authMethod` is `TOKEN`.                                                                                                                                      |
+| **kubernetesRole**                    | Vault role bound to the pod's Kubernetes service account. Required when `authMethod` is `KUBERNETES`.                                                                                                                               |
+| **kubernetesAuthPath**                | Vault authentication mount path used for the `KUBERNETES` authentication method. The default is `kubernetes`.                                                                                                                       |
+| **kubernetesServiceAccountTokenPath** | Path to the file containing the Kubernetes service account token. The default is `/var/run/secrets/kubernetes.io/serviceaccount/token`. Relative paths are resolved relative to the signing key configuration file directory.       |
+| **httpProtocolVersion**               | Override HTTP protocol version that is used to connect to HashiCorp Vault. Valid values are `HTTP_2` and `HTTP_1_1`. The default is `HTTP_2`.                                                                                       |
 
 <!-- markdownlint-enable -->
 
@@ -163,17 +163,17 @@ keyName: "KeyName"
   </TabItem>
 </Tabs>
 
-| Key | Description |
-| --- | --- |
-| **type** | Type of configuration file. Use `azure-secret` or `azure-key`. |
+| Key                    | Description                                                                                                                                                                                                                 |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **type**               | Type of configuration file. Use `azure-secret` or `azure-key`.                                                                                                                                                              |
 | **authenticationMode** | Authentication type being used. Can only be used with the `azure-secret` type. Valid options are `CLIENT_SECRET`, `SYSTEM_ASSIGNED_MANAGED_IDENTITY`, and `USER_ASSIGNED_MANAGED_IDENTITY`. The default is `CLIENT_SECRET`. |
-| **keyType** | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `SECP256K1`. |
-| **clientId** | ID used to authenticate with Azure Key Vault. Required when using the `azure-key` type, or when using `azure-secret` with the `CLIENT_SECRET` or `USER_ASSIGNED_MANAGED_IDENTITY` authentication modes. |
-| **clientSecret** | Secret used to access the vault. Required for the `CLIENT_SECRET` authentication mode. |
-| **tenantId** | The tenant ID used to authenticate with Azure Key Vault. |
-| **vaultName** | Name of the vault to access. Sub-domain of vault.azure.net. |
-| **secretName** | Name of the key stored in the Azure Key Vault under Secrets settings. Required when using the `azure-secret` type. |
-| **keyName** | Name of the key stored in the Azure Key Vault under Keys settings. Required when using the `azure-key` type. |
+| **keyType**            | Signing key type. Valid options are `BLS` or `SECP256K1`. The default is `SECP256K1`.                                                                                                                                       |
+| **clientId**           | ID used to authenticate with Azure Key Vault. Required when using the `azure-key` type, or when using `azure-secret` with the `CLIENT_SECRET` or `USER_ASSIGNED_MANAGED_IDENTITY` authentication modes.                     |
+| **clientSecret**       | Secret used to access the vault. Required for the `CLIENT_SECRET` authentication mode.                                                                                                                                      |
+| **tenantId**           | The tenant ID used to authenticate with Azure Key Vault.                                                                                                                                                                    |
+| **vaultName**          | Name of the vault to access. Sub-domain of vault.azure.net.                                                                                                                                                                 |
+| **secretName**         | Name of the key stored in the Azure Key Vault under Secrets settings. Required when using the `azure-secret` type.                                                                                                          |
+| **keyName**            | Name of the key stored in the Azure Key Vault under Keys settings. Required when using the `azure-key` type.                                                                                                                |
 
 <!-- markdownlint-enable -->
 
@@ -192,15 +192,15 @@ secretName: "SecretName"
 region: "us-west-2"
 ```
 
-| Key | Description |
-| --- | --- |
-| **type** | Type of configuration file. Use `aws-secret`. |
+| Key                    | Description                                                                                                                                                                                                                                                                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **type**               | Type of configuration file. Use `aws-secret`.                                                                                                                                                                                                                                                                                           |
 | **authenticationMode** | Authentication type being used. Valid options are `ENVIRONMENT` and `SPECIFIED`. If using `ENVIRONMENT`, credentials are authenticated using the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default). The default authentication type is `SPECIFIED`. |
-| **keyType** | Signing key type. Use `BLS`. |
-| **accessKeyId** | Your access key ID. |
-| **secretAccessKey** | Your secret access key. |
-| **secretName** | Name of the secret. |
-| **region** | Region to connect to. |
+| **keyType**            | Signing key type. Use `BLS`.                                                                                                                                                                                                                                                                                                            |
+| **accessKeyId**        | Your access key ID.                                                                                                                                                                                                                                                                                                                     |
+| **secretAccessKey**    | Your secret access key.                                                                                                                                                                                                                                                                                                                 |
+| **secretName**         | Name of the secret.                                                                                                                                                                                                                                                                                                                     |
+| **region**             | Region to connect to.                                                                                                                                                                                                                                                                                                                   |
 
 ## AWS Key Management Service
 
@@ -220,16 +220,16 @@ endpointOverride: "http://localhost:4566"
 
 <!-- markdownlint-disable -->
 
-| Key                    | Description                                                                                                                                                                                                                                                                                                                            |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **type**               | Type of configuration file. Use `aws-kms`.                                                                                                                                                                                                                                                                                             |
+| Key                    | Description                                                                                                                                                                                                                                                                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **type**               | Type of configuration file. Use `aws-kms`.                                                                                                                                                                                                                                                                                              |
 | **authenticationMode** | Authentication type being used. Valid options are `ENVIRONMENT` and `SPECIFIED`. If using `ENVIRONMENT`, credentials are authenticated using the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default). The default authentication type is `SPECIFIED`. |
-| **accessKeyId**        | Access key ID.                                                                                                                                                                                                                                                                                                                         |
-| **secretAccessKey**    | Secret access key.                                                                                                                                                                                                                                                                                                                     |
+| **accessKeyId**        | Access key ID.                                                                                                                                                                                                                                                                                                                          |
+| **secretAccessKey**    | Secret access key.                                                                                                                                                                                                                                                                                                                      |
 | **sessionToken**       | Token provided by [AWS Security Token Service (STS)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html). Optional depending on AWS configuration.                                                                                                                                                |
-| **kmsKeyId**           | AWS Access Key ID to authenticate AWS KMS.                                                                                                                                                                                                                                                                                             |
-| **region**             | Region to connect to.                                                                                                                                                                                                                                                                                                                  |
-| **endpointOverride**   | Endpoint override for AWS KMS. Useful for local testing against LocalStack.                                                                                                                                                                                                                                                            |
+| **kmsKeyId**           | AWS Access Key ID to authenticate AWS KMS.                                                                                                                                                                                                                                                                                              |
+| **region**             | Region to connect to.                                                                                                                                                                                                                                                                                                                   |
+| **endpointOverride**   | Endpoint override for AWS KMS. Useful for local testing against LocalStack.                                                                                                                                                                                                                                                             |
 
 <!-- Links -->
 

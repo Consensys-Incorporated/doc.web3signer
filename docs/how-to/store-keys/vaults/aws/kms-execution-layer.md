@@ -16,8 +16,8 @@ provides the information you need to get started.
 
 Keys stored in AWS KMS can be loaded into Web3Signer by:
 
-* Using a [key configuration file](../../../load-keys.md#use-key-configuration-files).
-* Bulk loading using the [`eth1` subcommand](../../../load-keys.md#aws-key-management-service).
+- Using a [key configuration file](../../../load-keys.md#use-key-configuration-files).
+- Bulk loading using the [`eth1` subcommand](../../../load-keys.md#aws-key-management-service).
 
 ## Cache AWS KMS when loading multiple keys
 

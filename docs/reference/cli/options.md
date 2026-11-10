@@ -1240,6 +1240,21 @@ tls-allow-ca-clients
 
 Allows clients signed with trusted CA certificates to connect.
 
+:::warning CA compromise risk
+
+This option trusts any client certificate that chains to a certificate authority in the Java
+trust store, including public CAs.
+Docker images before 26.10.2 trust the compromised eMudhra roots.
+Images from 26.10.2 onward do not.
+A binary install uses the Java runtime on the host, so update that runtime before relying on this
+option.
+On any version, prefer [`--tls-known-clients-file`](#tls-known-clients-file), which does not use
+the Java trust store.
+See the
+[October 2026 eMudhra CA compromise](https://github.com/Consensys-Incorporated/web3signer/discussions/1269).
+
+:::
+
 ### `vertx-worker-pool-size`
 
 <Tabs>
@@ -1284,6 +1299,30 @@ The default is `20`.
 ```
 
 Displays the help and exits.
+
+### `Xhelp`
+
+```bash title="Syntax"
+-X, --Xhelp
+```
+
+Displays the early access options and their descriptions, and exits.
+
+:::caution
+
+Early access options are not yet a final interface.
+They may be changed or removed between releases without announcement.
+
+:::
+
+`--help` omits early access options.
+Option names start with `--X`.
+This command is available on the root command, `eth1`, and `eth2`.
+
+- `web3signer -X`, `web3signer --Xhelp`, or `web3signer Xhelp` lists the
+  early access options, grouped by the command that owns them.
+- `web3signer eth2 -X` lists only the `eth2` options.
+- `web3signer eth1 -X` lists only the `eth1` options.
 
 ### `version`
 
