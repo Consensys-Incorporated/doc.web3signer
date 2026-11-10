@@ -3,3 +3,5 @@
 # commits them unformatted, so keep them out of the formatting check.
 docs/reference/api/eth1/
 docs/reference/api/eth2/
+versioned_docs/version-*/reference/api/eth1/
+versioned_docs/version-*/reference/api/eth2/

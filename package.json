@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build && node scripts/copy-md-to-build.js",
+    "build": "docusaurus build && node scripts/copy-md-to-build.js && node scripts/api-markdown-to-build.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -21,7 +21,7 @@
     "format:docs": "prettier --write \"docs/**/*.{md,mdx}\"",
     "format:docs:check": "prettier --check \"docs/**/*.{md,mdx}\"",
     "prepare": "node scripts/husky-prepare.js",
-    "gen-api-docs": "docusaurus gen-api-docs all",
+    "gen-api-docs": "docusaurus gen-api-docs all && node scripts/sync-api-docs-to-stable.js",
     "clean-api-docs": "docusaurus clean-api-docs all"
   },
   "lint-staged": {

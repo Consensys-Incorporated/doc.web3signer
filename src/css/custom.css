@@ -33,11 +33,13 @@
 }
 
 /* Target the welcome screen container by its prefix */
-[class*="welcomeScreen_"] p{
+[class*="welcomeScreen_"] p {
   white-space: pre-wrap !important;
-  font-size: 0.85rem !important;    /* Shrinks the text (approx 13.6px) */
-  line-height: 1.5;             /* Adds a bit of breathing room between lines */
-  color: var(--ifm-color-emphasis-700); /* Optional: softens the text color slightly */
+  font-size: 0.85rem !important; /* Shrinks the text (approx 13.6px) */
+  line-height: 1.5; /* Adds a bit of breathing room between lines */
+  color: var(
+    --ifm-color-emphasis-700
+  ); /* Optional: softens the text color slightly */
 }
 
 /* Separate the version dropdown from the icon cluster */
@@ -191,74 +193,111 @@ html[data-theme="dark"] .header-dockerhub-link::before {
     display: none !important;
   }
 }
-/* Sidebar Method labels */
+/* Sidebar method marks share a column at the end of the operation name. */
 .api-method > .menu__link {
-  align-items: center;
-  justify-content: start;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.45rem;
 }
 
-.api-method > .menu__link::before {
-  width: 50px;
-  height: 20px;
-  font-size: 12px;
-  line-height: 20px;
-  text-transform: uppercase;
-  font-weight: 600;
-  border-radius: 0.25rem;
-  border: 1px solid;
-  border-inline-start-width: 5px;
-  margin-right: var(--ifm-spacing-horizontal);
+.api-method > .menu__link::after {
+  display: inline-block;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 2.85rem;
+  margin-top: 0.1rem;
+  font-size: 10.8px;
+  font-weight: 700;
+  line-height: 16.8px;
   text-align: center;
-  flex-shrink: 0;
+  text-transform: uppercase;
+  border-radius: 4px;
 }
 
-.get > .menu__link::before {
+.get > .menu__link::after {
   content: "get";
   background-color: var(--ifm-color-info-contrast-background);
   color: var(--ifm-color-info-contrast-foreground);
-  border-color: var(--ifm-color-info-dark);
 }
 
-.post > .menu__link::before {
+.post > .menu__link::after {
   content: "post";
   background-color: var(--ifm-color-success-contrast-background);
   color: var(--ifm-color-success-contrast-foreground);
-  border-color: var(--ifm-color-success-dark);
 }
 
-.delete > .menu__link::before {
+.delete > .menu__link::after {
   content: "del";
   background-color: var(--ifm-color-danger-contrast-background);
   color: var(--ifm-color-danger-contrast-foreground);
-  border-color: var(--ifm-color-danger-dark);
 }
 
-.put > .menu__link::before {
+.put > .menu__link::after {
   content: "put";
   background-color: var(--ifm-color-warning-contrast-background);
   color: var(--ifm-color-warning-contrast-foreground);
-  border-color: var(--ifm-color-warning-dark);
 }
 
-.patch > .menu__link::before {
+.patch > .menu__link::after {
   content: "patch";
   background-color: var(--ifm-color-success-contrast-background);
   color: var(--ifm-color-success-contrast-foreground);
-  border-color: var(--ifm-color-success-dark);
 }
 
-.head > .menu__link::before {
+.head > .menu__link::after {
   content: "head";
   background-color: var(--ifm-color-secondary-contrast-background);
   color: var(--ifm-color-secondary-contrast-foreground);
-  border-color: var(--ifm-color-secondary-dark);
 }
 
-.event > .menu__link::before {
+.event > .menu__link::after {
   content: "event";
   background-color: var(--ifm-color-secondary-contrast-background);
   color: var(--ifm-color-secondary-contrast-foreground);
-  border-color: var(--ifm-color-secondary-dark);
+}
+
+/* Method badge under the operation title uses the sidebar chip colors. */
+.openapi__method-endpoint .badge--primary {
+  --ifm-badge-background-color: var(--ifm-color-info-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-info-contrast-foreground);
+}
+
+.openapi__method-endpoint .badge--success {
+  --ifm-badge-background-color: var(--ifm-color-success-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-success-contrast-foreground);
+}
+
+.openapi__method-endpoint .badge--danger {
+  --ifm-badge-background-color: var(--ifm-color-danger-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-danger-contrast-foreground);
+}
+
+.openapi__method-endpoint .badge--info {
+  --ifm-badge-background-color: var(--ifm-color-warning-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-warning-contrast-foreground);
+}
+
+.openapi__method-endpoint .badge--warning {
+  --ifm-badge-background-color: var(--ifm-color-success-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-success-contrast-foreground);
+}
+
+.openapi__method-endpoint .badge--secondary {
+  --ifm-badge-background-color: var(--ifm-color-secondary-contrast-background);
+  --ifm-badge-border-color: var(--ifm-badge-background-color);
+
+  color: var(--ifm-color-secondary-contrast-foreground);
 }
 
 /* Algolia Search Styling */
@@ -334,7 +373,9 @@ html[data-theme="dark"] .navbar__search-input::placeholder {
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 4px 14px rgb(0 0 0 / 20%);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .floating-ask-ai-btn:hover {
@@ -368,4 +409,102 @@ h3 {
 
 h4 {
   font-size: 16px;
+}
+
+.openapi-response-content-type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-font-color-secondary);
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.8rem;
+}
+
+.openapi-response-content-type select {
+  flex: 1;
+  min-width: 0;
+  padding: 0.3rem 0.5rem;
+  color: var(--ifm-font-color-base);
+  font-size: 0.8rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--openapi-explorer-border-color);
+  border-radius: var(--ifm-global-radius);
+}
+
+.openapi-request-example-heading {
+  margin-top: 0;
+}
+
+.openapi-request-samples {
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0.25rem;
+  background-color: var(--ifm-pre-background);
+  border: 1px solid var(--openapi-explorer-border-color);
+  border-radius: var(--ifm-global-radius);
+  box-shadow:
+    0 2px 3px hsl(222deg 8% 43% / 10%),
+    0 8px 16px -10px hsl(222deg 8% 43% / 20%);
+}
+
+.openapi-request-samples
+  .openapi-tabs__code-container:not(.openapi-tabs__code-container-inner) {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.openapi-request-samples
+  .openapi-tabs__code-container:not(.openapi-tabs__code-container-inner):hover {
+  box-shadow: none;
+}
+
+.openapi-request-example {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.8rem;
+}
+
+.openapi-request-example select {
+  flex: 1;
+  min-width: 0;
+  padding: 0.3rem 0.5rem;
+  color: var(--ifm-font-color-base);
+  font-size: 0.8rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--openapi-explorer-border-color);
+  border-radius: var(--ifm-global-radius);
+}
+
+.openapi-right-panel__container .openapi-tabs__code-item::after {
+  filter: grayscale(1);
+  opacity: 0.72;
+}
+
+.openapi-right-panel__container .openapi-tabs__code-item.active {
+  color: var(--ifm-font-color-base);
+  border-color: var(--openapi-explorer-border-color);
+  box-shadow: none;
+}
+
+.openapi-right-panel__container .openapi-tabs__code-item.active::after {
+  opacity: 1;
+}
+
+/* The curl sample is tagged bash, so the theme's curl icon never applies. */
+.openapi-right-panel__container .openapi-tabs__code-item--bash::after {
+  content: "";
+  width: var(--code-tab-logo-width);
+  height: var(--code-tab-logo-height);
+  margin-block: auto;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cGF0aCBmaWxsPSIjMjkzMTM4IiBkPSJNMTEyLjIwNSAyNi4xMjkgNzEuOCAyLjE0MkExNS4zMjYgMTUuMzI2IDAgMCAwIDY0LjAwNSAwYy0yLjY4OCAwLTUuMzg2LjcxNy03Ljc5NiAyLjE1MkwxNS43OTUgMjYuMTRDMTAuOTc2IDI4Ljk5OSA4IDM0LjI4OSA4IDQwLjAxOHY0Ny45NzVjMCA1LjcyOSAyLjk2NyAxMS4wMTkgNy43OTYgMTMuODc4TDU2LjIgMTI1Ljg1OEExNS4xOTMgMTUuMTkzIDAgMCAwIDYzLjk5NSAxMjhhMTUuMzIgMTUuMzIgMCAwIDAgNy43OTYtMi4xNDJsNDAuNDE0LTIzLjk4N2M0LjgxOS0yLjg2IDcuNzk2LTguMTYgNy43OTYtMTMuODc4VjQwLjAwN2MwLTUuNzE4LTIuOTY3LTExLjAxOS03Ljc5Ni0xMy44Nzh6bS0zMS4yOSA3NC45MDcuMDYzIDMuNDQ4YzAgLjQxOC0uMjY3Ljg4OS0uNTg4IDEuMDZsLTIuMDQ2IDEuMTc4Yy0uMzIxLjE2LS42LS4wMzItLjYtLjQ1bC0uMDMyLTMuMzk0Yy0xLjc0NS43MjgtMy41MjMuOS00LjY0Ny40NS0uMjE0LS4wODYtLjMxLS4zOTctLjIyNS0uNzYxbC43MzktMy4xMTZjLjA2NC0uMjQ2LjE5My0uNDkzLjM2NC0uNjQzYS43MjUuNzI1IDAgMCAxIC4xOTMtLjEzOWMuMTE3LS4wNjQuMjM1LS4wNzUuMzMyLS4wMzIgMS4yMi40MDcgMi43NzMuMjE0IDQuMjcyLS41MzUgMS45MDctLjk2NCAzLjE4LTIuOTEzIDMuMTYtNC44NC0uMDIyLTEuNzU3LS45NjQtMi40NzQtMy4yNjctMi40OTYtMi45MzQuMDEtNS42NzUtLjU2Ny01LjcxOC00Ljg5NC0uMDMyLTMuNTU1IDEuODEtNy4yNiA0Ljc0NC05LjU5NWwtLjAzMi0zLjQ4YzAtLjQyOC4yNTctLjkuNTg5LTEuMDdsMS45OC0xLjI2NGMuMzIyLS4xNjEuNi4wNDMuNi40NmwuMDMzIDMuNDhjMS40NTYtLjU3OCAyLjcyLS43MzggMy44NjUtLjQ3LjI0Ny4wNjQuMzY0LjQwNi4yNTcuODAybC0uNzcgMy4wODRhMS4zNzIgMS4zNzIgMCAwIDEtLjM1NC42MjIuODI1LjgyNSAwIDAgMS0uMjAzLjE1Yy0uMTA4LjA1My0uMjA0LjA2NC0uMy4wNTMtLjUyNS0uMTE4LTEuNzY3LS4zODUtMy43MjcuNi0yLjA1NiAxLjAzOC0yLjc3MyAyLjgyNy0yLjc2MyA0LjE1NS4wMjIgMS41ODUuODI1IDIuMDY2IDMuNjMgMi4xMSAzLjczOC4wNjQgNS4zNDQgMS42OTEgNS4zODcgNS40NS4wNTMgMy42ODQtMS45MTcgNy42NTctNC45MzcgMTAuMDc3em0yMS4xOC01Ljc5NGMwIC4zMjItLjA0Mi42MjEtLjMxLjc3MWwtMTAuMjE2IDYuMjExYy0uMjY3LjE2MS0uNDgyLjAyMi0uNDgyLS4zVjk5LjI5YzAtLjMyMS4xOTMtLjQ5Mi40Ni0uNjUzbDEwLjA2Ny02LjAxOGMuMjY4LS4xNi40ODItLjAyMi40ODIuM3ptNy4wMjYtNTguOTkzTDcwLjg5IDU5Ljg2Yy00Ljc2NSAyLjc4NC04LjI3OCA1LjkxMS04LjI4OCAxMS42NjJ2NDcuMTA3YzAgMy40MzcgMS4zOTIgNS42NjUgMy41MjMgNi4zMThhMTIuODEgMTIuODEgMCAwIDEtMi4xMi4yMDRjLTIuMjM5IDAtNC40NDUtLjYxLTYuMzgzLTEuNzU3TDE3LjIxOSA5OS40MDhjLTMuOTUxLTIuMzQ1LTYuNDAzLTYuNzI1LTYuNDAzLTExLjQyNlY0MC4wMDdjMC00LjcgMi40NTItOS4wOCA2LjQwMy0xMS40MjZMNTcuNjM0IDQuNTk0YTEyLjU1NSAxMi41NTUgMCAwIDEgNi4zODItMS43NTZjMi4yMzggMCA0LjQ0NC42MSA2LjM4MiAxLjc1Nmw0MC40MTUgMjMuOTg3YzMuMzMgMS45ODEgNS41NzkgNS4zOTcgNi4yMSA5LjI0Mi0xLjM2LTIuODYtNC4zOC0zLjYzLTcuOTAyLTEuNTc0eiIvPjwvc3ZnPgo=");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: var(--bash-background-color);
+  border-radius: var(--bash-border-radius);
 }

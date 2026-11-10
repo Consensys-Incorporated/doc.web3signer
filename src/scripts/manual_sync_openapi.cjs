@@ -100,7 +100,9 @@ try {
   sh(`npm run gen-api-docs`, { cwd: repoRoot });
 
   console.log("Manual OpenAPI sync complete.");
-  console.log("Reminder: commit changes under docs/reference/api/** (Option A).");
+  console.log(
+    "Reminder: commit docs/reference/api/** and versioned_docs/version-<stable>/reference/api/**."
+  );
 } finally {
   rmrf(tmpDir);
 }

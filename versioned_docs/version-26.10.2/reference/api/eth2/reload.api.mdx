@@ -1,0 +1,77 @@
+---
+id: reload
+title: "Reload signer keys asynchronously"
+description: "Reloads signer keys asynchronously in the background. This endpoint is used after adding, removing,"
+sidebar_label: "Reload signer keys asynchronously"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVsFu20YQ/ZXBnhKDlgklOUQ3IzUao2kSxA56iA1kTI7IjZez9M5QjiDo34tZSpZipUWAXoo2J1Hc3Zk378087sopNuJmn9wHChFruPANU4LfaCnuunA1SZV8rz6ym232CMi46ZaWAihLrtoUOQ4SluAZtCW4weq2SXHgegKXrRcgrvvoWcELDEI14FwpAda156aARF1c5Kcrjgm6WPv50nOTc2hMBHMfSEAjdHhL8AfdPNtAxXtMBHGe81YtckMC917bOCgkEsWknpvJFV/xZUuQxkJjTwmtrtkVH8NFhSyAIUAVee6bIVG9y137RJXG5EkAuc5olWCBQ1Cx428yLQsMvt6Ss42Tc2w2NQL3mNhzIzCPCZCNsPHYt/vhSYdhHlNH9Vh58bDRUBVAWk2eWtTf8ZYEZKgqEpkPISzB6qMtEAFcoA94EyjntLdG7EP9GdsH0iGxgO86qj0qhWXmEKblFE6rinqlGu5bHwj6FC2XBakiq+eB5FB3o/vo6LzrY1JkBY5KMjs6smzvOCwh8qEWUCFDGhhQAUF9R/BEhhuhu4HY1LwbSFQgZbjwvHwJryLPg680k3HOtV/4esCwlcHiG9I5+jAkEqijQYEKB6EMmVh9eoCiMW+1YB+F4POvZ5dwMq59tsWqpeoWRFGHsRcopWhqDzy2wsXfKZFoTw1aEIOfg8SOHss/YjAG30YdB+ZmOTYYquULnljl6AiOQW2+vKEBrDvPXtTCLGg3dCY8x5o2TMckkyt2hXsg/ry28T578+70F1e4RNJHFhI3W7lpObWf7znBVhDAbYcYI15MwtxkB13hCmc9Q6wWE/s++CoDOPkiFnjlpGqpQ3vSZU9u5uLNF6o0o7obfKLa3KqKNbnCdSSCDZlT9cmKUT+Czuu7GJ6VGkrusaG9vrx8vxXTjsCTaTl96ta7yLsYoslzcxhi6JCPE2GdRd2cG4fHs2gaqlHSR83j1ut14egrdn2gHeRpOd1LvuV5NyA/zPQk9+9e+z4GMDEE68I9L18e6nt6OJrWYcHqzCbfp9gkEvmXC/pPpBwne3v6+3I9L1/uy/XDtE3gfSA0B0pLwAY9Q0CltBXlRVkeinLOSokx7H/9hNKC0gbrcfYNylJ79mpGfoDof67Yi7LcV+yB04uRyDMLkUXIOLSN5ox9FCu/R23dzG0GyhVuZN/uTys3pOBmzq2L7WOr2s9OTkKsMLRRdPayLEu3vi6c53nMxXk1aG5Pz7PL11M47f1BqbYOZ9pO4TSpn2OlNnuWfVx/NiknpStc8BWx5IIZu9yUPVYtwTQvfwPt/v5+gnl1ElNzsjkqJ2/OX529vTg7nk7KSatdcEaGcdAh7wXemNNf3wYfF7Hadd7Pu+TPu+TPu+R/6S65cWqlr3rSB/RsTp7tZrUxzk9uY5zXhTNDtDer1Q0KfUxhvbbXdwOlpZt9ui7cApO32uzfunAtYU0pO+0tLc3WcieZB2IYLPPBp8ys9sHC37+7uHTr9Z8NRlFI
+sidebar_class_name: "post api-method"
+info_path: reference/api/eth2/web-3-signer-eth-2-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Reload signer keys asynchronously"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/reload"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Reloads signer keys asynchronously in the background. This endpoint is used after adding, removing, 
+or modifying keystore files to make Web3Signer aware of the changes without restarting.
+
+The reload operation:
+- Scans all configured keystore directories and remote vaults
+- Loads valid signer configurations
+- Logs warnings for any invalid configurations (malformed files, invalid keys, etc.)
+- Makes successfully loaded signers available for signing operations
+- Returns immediately with 202 Accepted while processing continues in the background
+
+**Important notes:**
+- Only one reload operation can run at a time (subsequent requests return 409 Conflict)
+- Individual signer loading failures do not cause the entire reload to fail
+- Use `GET /reload` to check status and error counts
+- Successfully loaded signers are available even if some configurations fail
+
+**Not used by validator clients** - this is an administrative endpoint for node operators.
+
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./reload.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./reload.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      

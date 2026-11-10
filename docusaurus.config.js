@@ -312,7 +312,7 @@ const config = {
         excludeImports: true,
         removeDuplicateHeadings: true,
         logLevel: process.env.CI ? "quiet" : "normal",
-        ignoreFiles: ["img/**"],
+        ignoreFiles: ["img/**", "**/*.api.mdx", "**/*.info.mdx"],
         includeOrder: [
           "get-started/**/*",
           "concepts/**/*",
