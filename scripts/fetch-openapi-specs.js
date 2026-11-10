@@ -84,18 +84,29 @@ function bundleSpecs() {
   run("node", [
     path.join(ROOT_DIR, "src", "scripts", "normalize_openapi_servers.cjs"),
   ]);
+  // The docs build installs with --omit=dev, so this must be the local
+  // production copy. npx would otherwise download the unrelated redocly@1.0.0.
+  const redocly = path.join(ROOT_DIR, "node_modules", ".bin", "redocly");
+  if (!fs.existsSync(redocly)) {
+    throw new Error(
+      "fetch-openapi-specs: @redocly/cli is not installed. It must be a production dependency.",
+    );
+  }
   for (const api of APIS) {
+    const output = bundlePath(api);
     run(
-      "npx",
+      redocly,
       [
-        "redocly",
         "bundle",
         path.join(SPECS_DIR, api, "web3signer.yaml"),
         "--output",
-        bundlePath(api),
+        output,
       ],
       { cwd: ROOT_DIR },
     );
+    if (!fs.existsSync(output)) {
+      throw new Error(`fetch-openapi-specs: bundle did not write ${output}`);
+    }
   }
 }
 
