@@ -3,7 +3,8 @@
  * Write a Markdown file for each generated API operation into the build output.
  *
  * Development pages are served under /development/. The stable snapshot is
- * served at the site root. Both trees are exported:
+ * served at the site root. The stable eth1 and eth2 folders are symlinks to
+ * docs/reference/api, so both exports are the same unversioned API reference:
  *
  *   docs/reference/api/eth2/sign.api.mdx
  *     → build/development/reference/api/eth2/sign.md
@@ -58,7 +59,10 @@ function walkOperations(dir, found = []) {
   }
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
+    const isDirectory =
+      entry.isDirectory() ||
+      (entry.isSymbolicLink() && fs.statSync(fullPath).isDirectory());
+    if (isDirectory) {
       if (entry.name.startsWith("_")) {
         continue;
       }

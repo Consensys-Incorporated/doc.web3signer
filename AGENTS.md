@@ -57,9 +57,10 @@ appends the stable operation Markdown to those files after the build. Developmen
 Markdown is served at `/development/...md` and is not added to the index.
 
 Editing `docs/` does not change `llms.txt`, `llms-full.txt`, or the stable raw `.md` exports
-until that version is frozen and `lastVersion` is bumped. `npm run gen-api-docs` also copies
-the generated operation pages into `versioned_docs/version-<lastVersion>/reference/api/`, so
-the current stable snapshot serves the same REST operations as development.
+until that version is frozen and `lastVersion` is bumped. The REST API reference is the exception:
+it is not versioned. `npm run gen-api-docs` writes it to `docs/reference/api/` and links
+`versioned_docs/version-*/reference/api/eth1` and `eth2` at that tree, so every docs version
+serves the same API pages.
 
 Pre-release pages are kept out of the sitemap but remain indexable on purpose, so readers
 searching for unreleased functionality can still find it. The version banner is the in-page

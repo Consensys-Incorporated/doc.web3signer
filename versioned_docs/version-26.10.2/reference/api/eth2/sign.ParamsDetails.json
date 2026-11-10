@@ -1,1 +1,0 @@
-{"parameters":[{"name":"identifier","in":"path","required":true,"description":"BLS public key in hex format for which data to sign","schema":{"type":"string","example":"0x989d34725a2bfc3f15105f3f5fc8741f436c25ee1ee4f948e425d6bcb8c56bce6e06c269635b7e985a7ffa639e2409bf"}}]}

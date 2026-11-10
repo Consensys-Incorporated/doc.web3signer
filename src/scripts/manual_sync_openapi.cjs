@@ -101,7 +101,7 @@ try {
 
   console.log("Manual OpenAPI sync complete.");
   console.log(
-    "Reminder: commit docs/reference/api/** and versioned_docs/version-<stable>/reference/api/**."
+    "Reminder: commit docs/reference/api/**. Versioned snapshots link eth1 and eth2 at that tree."
   );
 } finally {
   rmrf(tmpDir);

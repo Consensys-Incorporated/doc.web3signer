@@ -54,10 +54,12 @@ after a version is frozen but before `lastVersion` is bumped.
 
 Freezing a version and bumping `lastVersion` is all a release needs; the agent outputs follow.
 
-`npm run gen-api-docs` writes the REST operation pages to `docs/reference/api/` and copies
-them into `versioned_docs/version-<lastVersion>/reference/api/`. Development serves the first
-tree. The current stable snapshot serves the second. A later freeze copies `docs/`, so the new
-stable version includes the operation pages and the sidebar groups from `sidebars.js`.
+`npm run gen-api-docs` writes the REST operation pages to `docs/reference/api/`. That reference
+is not versioned. The command then links `eth1` and `eth2` inside every
+`versioned_docs/version-*/reference/api/` directory at those source folders, so stable and
+development serve the same API pages. A later `docs:version` copies `docs/` into the new
+snapshot, including a copy of the API folders. Run `npm run gen-api-docs` again after the freeze
+so those copies become links. The new snapshot still picks up the sidebar groups from `sidebars.js`.
 
 `scripts/api-markdown-to-build.js` writes one `.md` file per operation into the build, for both
 trees. Those files are not committed. On an API page, Copy page and View as Markdown read that

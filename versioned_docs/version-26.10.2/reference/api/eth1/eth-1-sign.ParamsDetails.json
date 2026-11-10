@@ -1,1 +1,0 @@
-{"parameters":[{"name":"identifier","in":"path","required":true,"description":"Key for which data to sign","schema":{"type":"string"}}]}

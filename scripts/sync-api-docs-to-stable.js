@@ -1,70 +1,65 @@
 #!/usr/bin/env node
 /**
- * Copy the generated REST operation pages into the current stable snapshot.
+ * Point every docs version at the one REST API reference.
  *
- * `gen-api-docs` writes them to `docs/reference/api/`, which Docusaurus serves
- * as the development version. The stable version only renders files in
- * `versioned_docs/version-<lastVersion>/`. This copies the eth1 and eth2
- * trees there so both versions serve the same operations.
+ * `gen-api-docs` writes the operation pages to `docs/reference/api/`. The API
+ * reference is not versioned: stable and development both serve those files.
+ * Each snapshot under versioned_docs gets a symlink for eth1 and eth2 instead
+ * of its own copy. A later `docs:version` copies
+ * `docs/` into the new snapshot; running this again replaces that copy with a
+ * link, so the new version stays on the same API pages.
  *
- * The next `docs:version` copies `docs/` on its own. Running this again after
- * that refreshes the current stable API pages from `docs/`. Older snapshots
- * are left alone.
+ * Sidebar labels live in the source tree. `clean-api-docs` deletes `*.json`
+ * directly under each output directory, so this writes `_category_.json` after
+ * generation.
  */
 
 const fs = require("fs");
 const path = require("path");
 
 const ROOT_DIR = path.join(__dirname, "..");
-const CONFIG_FILE = path.join(ROOT_DIR, "docusaurus.config.js");
 
 const CATEGORIES = {
   eth2: { label: "Consensus layer", position: 3 },
   eth1: { label: "Execution layer", position: 4 },
 };
 
-function stableVersion() {
-  const config = fs.readFileSync(CONFIG_FILE, "utf8");
-  const match = config.match(/lastVersion:\s*["']([^"']+)["']/);
-  if (!match) {
-    throw new Error(
-      "sync-api-docs-to-stable: no lastVersion in docusaurus.config.js",
-    );
-  }
-  return match[1];
-}
-
-function syncTree(version, name, category) {
-  const source = path.join(ROOT_DIR, "docs", "reference", "api", name);
-  const destination = path.join(
-    ROOT_DIR,
-    "versioned_docs",
-    `version-${version}`,
-    "reference",
-    "api",
-    name,
-  );
-  if (!fs.existsSync(source)) {
-    throw new Error(`sync-api-docs-to-stable: missing ${source}`);
-  }
-  fs.rmSync(destination, { recursive: true, force: true });
-  fs.cpSync(source, destination, { recursive: true });
-  // The stable sidebar autogenerates Reference. Development names these groups
-  // in sidebars.js, so the snapshot needs the labels here. clean-api-docs
-  // deletes *.json under docs/reference/api, so the files live only in the snapshot.
+function writeCategory(source, category) {
   fs.writeFileSync(
-    path.join(destination, "_category_.json"),
+    path.join(source, "_category_.json"),
     `${JSON.stringify({ label: category.label, position: category.position }, null, 2)}\n`,
   );
 }
 
+function linkTree(versionDir, name, category) {
+  const source = path.join(ROOT_DIR, "docs", "reference", "api", name);
+  if (!fs.existsSync(source)) {
+    throw new Error(`sync-api-docs-to-stable: missing ${source}`);
+  }
+  writeCategory(source, category);
+
+  const destination = path.join(versionDir, "reference", "api", name);
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.rmSync(destination, { recursive: true, force: true });
+  const relative = path.relative(path.dirname(destination), source);
+  fs.symlinkSync(relative, destination);
+}
+
 function main() {
-  const version = stableVersion();
-  for (const [name, category] of Object.entries(CATEGORIES)) {
-    syncTree(version, name, category);
+  const versionsDir = path.join(ROOT_DIR, "versioned_docs");
+  const versions = fs
+    .readdirSync(versionsDir)
+    .filter((name) => name.startsWith("version-"));
+  if (versions.length === 0) {
+    throw new Error("sync-api-docs-to-stable: no versioned_docs snapshots");
+  }
+  for (const version of versions) {
+    for (const [name, category] of Object.entries(CATEGORIES)) {
+      linkTree(path.join(versionsDir, version), name, category);
+    }
   }
   console.log(
-    `sync-api-docs-to-stable: copied eth1 and eth2 API docs into version-${version}`,
+    `sync-api-docs-to-stable: linked eth1 and eth2 API docs for ${versions.join(", ")}`,
   );
 }
 

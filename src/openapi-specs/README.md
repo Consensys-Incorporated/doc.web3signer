@@ -34,10 +34,11 @@ To manually sync:
 
 The generated API documentation is output to:
 
-- `docs/reference/api/eth2/` - Consensus layer API docs (development)
-- `docs/reference/api/eth1/` - Execution layer API docs (development)
+- `docs/reference/api/eth2/` - Consensus layer API docs
+- `docs/reference/api/eth1/` - Execution layer API docs
 
-`npm run gen-api-docs` then runs `scripts/sync-api-docs-to-stable.js`, which copies those
-trees into `versioned_docs/version-<lastVersion>/reference/api/` so the stable version serves
-them too. The Markdown files agents fetch (`.md` URLs) are written at build time by
+The API reference is not versioned. `npm run gen-api-docs` then runs
+`scripts/sync-api-docs-to-stable.js`, which links `eth1` and `eth2` in every
+`versioned_docs/version-*/reference/api/` directory at those folders. Stable and development
+serve the same pages. The Markdown files agents fetch (`.md` URLs) are written at build time by
 `scripts/api-markdown-to-build.js` and are not committed.
