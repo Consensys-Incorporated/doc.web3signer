@@ -2,6 +2,24 @@ const fs = require("fs");
 const lightCodeTheme = require("prism-react-renderer").themes.github;
 const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
+// OpenAPI plugin configuration. npm run gen-api-docs fetches the specs from the
+// Web3Signer tag that matches lastVersion, bundles them into src/openapi-specs, and
+// writes the pages under docs/reference/api. None of those files are committed.
+const openApiConfig = {
+  eth2Api: {
+    specPath: "src/openapi-specs/eth2-bundled.yaml",
+    outputDir: "docs/reference/api/eth2",
+    hideSendButton: true,
+    showSchemas: false,
+  },
+  eth1Api: {
+    specPath: "src/openapi-specs/eth1-bundled.yaml",
+    outputDir: "docs/reference/api/eth1",
+    hideSendButton: true,
+    showSchemas: false,
+  },
+};
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Consensys Web3Signer",
@@ -13,7 +31,7 @@ const config = {
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: "throw",
-    }
+    },
   },
   favicon: "img/favicon.ico",
   trailingSlash: false,
@@ -39,7 +57,8 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Set a base path separate from default /docs
-          editUrl: "https://github.com/Consensys-Incorporated/doc.web3signer/tree/main/",
+          editUrl:
+            "https://github.com/Consensys-Incorporated/doc.web3signer/tree/main/",
           path: "docs",
           routeBasePath: "/",
           breadcrumbs: true,
@@ -51,6 +70,8 @@ const config = {
             "**/_*/**",
             "**/*.test.{js,jsx,ts,tsx}",
             "**/__tests__/**",
+            // The REST API landing page is reference/api/rest.md, not the generated info page.
+            "**/*.info.mdx",
           ],
           showLastUpdateAuthor: false,
           showLastUpdateTime: false,
@@ -113,7 +134,11 @@ const config = {
       //   isCloseable: false,
       // },
       metadata: [
-        {name: 'keywords', content: 'remote signer, remote signing, key management, signing keys, vault support, Ethereum, secure signing'},
+        {
+          name: "keywords",
+          content:
+            "remote signer, remote signing, key management, signing keys, vault support, Ethereum, secure signing",
+        },
       ],
       colorMode: {
         defaultMode: "light",
@@ -256,6 +281,14 @@ const config = {
     }),
   plugins: [
     [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic",
+        config: openApiConfig,
+      },
+    ],
+    [
       "@docusaurus/plugin-google-gtag",
       {
         trackingID: "G-159G82NNKS",
@@ -280,7 +313,7 @@ const config = {
         excludeImports: true,
         removeDuplicateHeadings: true,
         logLevel: process.env.CI ? "quiet" : "normal",
-        ignoreFiles: ["img/**"],
+        ignoreFiles: ["img/**", "**/*.api.mdx", "**/*.info.mdx"],
         includeOrder: [
           "get-started/**/*",
           "concepts/**/*",
@@ -289,7 +322,7 @@ const config = {
           "reference/**/*",
         ],
       },
-    ],    
+    ],
     [
       "@docusaurus/plugin-client-redirects",
       {
@@ -467,6 +500,10 @@ const config = {
     ],
   ],
   themes: [
+    // Supplies the components the generated API pages import. The docs are deliberately
+    // not switched to docItemComponent: "@theme/ApiItem", which would bypass the swizzled
+    // DocItem/Layout and remove the copy page button from every page on the site.
+    "docusaurus-theme-openapi-docs",
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -474,8 +511,10 @@ const config = {
         hashed: true,
         indexBlog: false,
         askAi: {
-          project: "web3signer",                 
-          apiUrl: process.env.ASK_AI_API_URL || "http://localhost:5000/api/stream?api_key=....",
+          project: "web3signer",
+          apiUrl:
+            process.env.ASK_AI_API_URL ||
+            "http://localhost:5000/api/stream?api_key=....",
           hotkey: "cmd+k",
           texts: {
             welcomeMessage:
@@ -483,8 +522,8 @@ const config = {
               "Please do not input any of your own or another's personal information i.e, passwords, private keys, seed phrases, personal data, or other sensitive information. If you need support and do not want to engage with me, please reach out to us on GitHub Discussions. Any information that you provide is not used for training my AI systems. For details on our data handling practices, see our Privacy Policy.\n\n" +
               "By proceeding you acknowledge the above.",
             inputPlaceholder: "Please ask a question",
-          }              
-        },        
+          },
+        },
       },
     ],
   ],
@@ -501,14 +540,18 @@ const stableVersion =
   JSON.parse(fs.readFileSync("./versions.json", "utf8"))[0];
 
 if (!stableVersion) {
-  throw new Error("docusaurus.config.js: cannot determine the stable docs version");
+  throw new Error(
+    "docusaurus.config.js: cannot determine the stable docs version",
+  );
 }
 const llmsPlugin = config.plugins.find(
-  (plugin) => Array.isArray(plugin) && plugin[0] === "docusaurus-plugin-llms"
+  (plugin) => Array.isArray(plugin) && plugin[0] === "docusaurus-plugin-llms",
 );
 
 if (!llmsPlugin) {
-  throw new Error("docusaurus.config.js: docusaurus-plugin-llms is not configured");
+  throw new Error(
+    "docusaurus.config.js: docusaurus-plugin-llms is not configured",
+  );
 }
 
 llmsPlugin[1].docsDir = [
@@ -519,5 +562,3 @@ llmsPlugin[1].docsDir = [
 ];
 
 module.exports = config;
-
- 

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build && node scripts/copy-md-to-build.js",
+    "start": "npm run gen-api-docs && docusaurus start",
+    "build": "npm run gen-api-docs && docusaurus build && node scripts/copy-md-to-build.js && node scripts/api-markdown-to-build.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -20,7 +20,9 @@
     "lint:fix": "npm run lint:js -- --fix",
     "format:docs": "prettier --write \"docs/**/*.{md,mdx}\"",
     "format:docs:check": "prettier --check \"docs/**/*.{md,mdx}\"",
-    "prepare": "node scripts/husky-prepare.js"
+    "prepare": "node scripts/husky-prepare.js",
+    "gen-api-docs": "node scripts/fetch-openapi-specs.js && mkdir -p docs/reference/api/eth1 docs/reference/api/eth2 && docusaurus clean-api-docs all && docusaurus gen-api-docs all && node scripts/sync-api-docs-to-stable.js",
+    "clean-api-docs": "docusaurus clean-api-docs all"
   },
   "lint-staged": {
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
@@ -40,6 +42,9 @@
     "clsx": "^2.1.1",
     "docusaurus-plugin-copy-page-button": "^0.5.0",
     "docusaurus-plugin-llms": "^0.4.0",
+    "@redocly/cli": "^2.12.6",
+    "docusaurus-plugin-openapi-docs": "^5.2.0",
+    "docusaurus-theme-openapi-docs": "^5.2.0",
     "open-ask-ai": "^0.7.3",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
@@ -71,7 +76,10 @@
     "sockjs": {
       "uuid": "11.1.1"
     },
-    "tinypool": "2.2.0"
+    "tinypool": "2.2.0",
+    "openapi-to-postmanv2": {
+      "yaml": "1.10.3"
+    }
   },
   "browserslist": {
     "production": [

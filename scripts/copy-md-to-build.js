@@ -20,8 +20,10 @@
  * This lets agents request, e.g.:
  *   https://docs.web3signer.consensys.com/get-started/install-binaries.md
  *
- * Only the stable (root) version is covered. The development version and
- * archived versions are intentionally not exported as raw markdown.
+ * Only the stable (root) version of authored pages is covered. The development
+ * version and archived versions of those pages are not exported.
+ * scripts/api-markdown-to-build.js writes the generated API operations for
+ * both the stable and development versions.
  *
  * This script also repairs the home page entry in the generated llms.txt. See
  * fixLlmsTxtHomeLink below.
@@ -68,7 +70,7 @@ function getStableVersion() {
   if (!stable) {
     throw new Error(
       "copy-md-to-build: no stable version found (no lastVersion in " +
-        "docusaurus.config.js and versions.json is empty)"
+        "docusaurus.config.js and versions.json is empty)",
     );
   }
   return stable;
@@ -77,7 +79,9 @@ function getStableVersion() {
 function shouldSkip(relPath) {
   return relPath
     .split(path.sep)
-    .some((segment) => SKIP_PREFIXES.some((prefix) => segment.startsWith(prefix)));
+    .some((segment) =>
+      SKIP_PREFIXES.some((prefix) => segment.startsWith(prefix)),
+    );
 }
 
 /**
@@ -91,7 +95,10 @@ function addDirective(content) {
     if (closingIdx !== -1) {
       const insertAt = closingIdx + 5; // after "\n---\n"
       return (
-        content.slice(0, insertAt) + "\n" + AGENT_DIRECTIVE + content.slice(insertAt)
+        content.slice(0, insertAt) +
+        "\n" +
+        AGENT_DIRECTIVE +
+        content.slice(insertAt)
       );
     }
   }
@@ -151,7 +158,9 @@ function fixLlmsTxtHomeLink() {
   const llmsTxtPath = path.join(BUILD_DIR, "llms.txt");
 
   if (!fs.existsSync(llmsTxtPath)) {
-    console.warn("copy-md-to-build: build/llms.txt not found, skipping home link fix");
+    console.warn(
+      "copy-md-to-build: build/llms.txt not found, skipping home link fix",
+    );
     return;
   }
 
@@ -165,7 +174,7 @@ function fixLlmsTxtHomeLink() {
   const escapedSiteUrl = siteUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const brokenLinkPattern = new RegExp(
     `${escapedSiteUrl}/+(?:docs|versioned_docs/version-[^\\s)]+)\\.md`,
-    "g"
+    "g",
   );
   const homeLink = `${siteUrl}/index.md`;
   const content = fs.readFileSync(llmsTxtPath, "utf8");
@@ -175,14 +184,18 @@ function fixLlmsTxtHomeLink() {
   const brokenLinks = content.match(brokenLinkPattern);
   if (!brokenLinks) {
     console.warn(
-      "copy-md-to-build: no unresolved home link found in llms.txt, nothing rewritten"
+      "copy-md-to-build: no unresolved home link found in llms.txt, nothing rewritten",
     );
     return;
   }
 
-  fs.writeFileSync(llmsTxtPath, content.replace(brokenLinkPattern, homeLink), "utf8");
+  fs.writeFileSync(
+    llmsTxtPath,
+    content.replace(brokenLinkPattern, homeLink),
+    "utf8",
+  );
   console.log(
-    `copy-md-to-build: rewrote llms.txt home link ${brokenLinks[0]} to ${homeLink}`
+    `copy-md-to-build: rewrote llms.txt home link ${brokenLinks[0]} to ${homeLink}`,
   );
 }
 
@@ -216,12 +229,14 @@ const stableVersion = getStableVersion();
 const stableDir = path.join(VERSIONED_DOCS_DIR, `version-${stableVersion}`);
 
 if (!fs.existsSync(stableDir)) {
-  throw new Error(`copy-md-to-build: stable docs directory not found: ${stableDir}`);
+  throw new Error(
+    `copy-md-to-build: stable docs directory not found: ${stableDir}`,
+  );
 }
 
 walk(stableDir, stableDir);
 console.log(
-  `copy-md-to-build: stable version ${stableVersion} — copied ${copied} files, skipped ${skipped} files`
+  `copy-md-to-build: stable version ${stableVersion} — copied ${copied} files, skipped ${skipped} files`,
 );
 
 fixLlmsTxtHomeLink();

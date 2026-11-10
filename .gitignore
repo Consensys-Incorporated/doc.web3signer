@@ -9,6 +9,17 @@
 .cache-loader
 .idea
 
+# OpenAPI specs fetched from the Web3Signer repository and bundled by
+# scripts/fetch-openapi-specs.js during npm run gen-api-docs
+src/openapi-specs/eth1/
+src/openapi-specs/eth2/
+src/openapi-specs/*-bundled.yaml
+src/openapi-specs/.web3signer-ref
+
+# REST operation pages. npm run gen-api-docs writes these from the bundled specs.
+docs/reference/api/eth1/
+docs/reference/api/eth2/
+
 # Misc
 .DS_Store
 .env.local
