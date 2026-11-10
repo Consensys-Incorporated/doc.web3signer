@@ -411,6 +411,32 @@ h4 {
   font-size: 16px;
 }
 
+/* The details caret is a 0.75rem icon placed at the triangle's old top
+   offset, so its center sits below the label. Each header uses a different
+   caret offset, so the nudge is per label. */
+.openapi-markdown__details > summary > .openapi-schema__container {
+  position: relative;
+  top: 3px;
+}
+
+.openapi-markdown__details.response
+  > summary
+  > .openapi-markdown__details-summary-response {
+  position: relative;
+  top: 4px;
+}
+
+.openapi-left-panel__container
+  .openapi-markdown__details
+  > summary
+  > .openapi-markdown__details-summary-header-params,
+.openapi-markdown__details.mime
+  > summary
+  > .openapi-markdown__details-summary-header-body {
+  position: relative;
+  top: 2px;
+}
+
 .openapi-response-content-type {
   display: flex;
   align-items: center;
