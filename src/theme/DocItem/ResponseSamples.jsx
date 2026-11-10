@@ -3,6 +3,7 @@ import ApiTabs from "@theme/ApiTabs";
 import TabItem from "@theme/TabItem";
 import ApiCodeBlock from "@theme/ApiExplorer/ApiCodeBlock";
 import { sampleResponseFromSchema } from "docusaurus-plugin-openapi-docs/lib/openapi/createResponseExample";
+import { useResponseCodeGroup } from "../responseCodeGroup";
 
 function exampleFromMedia(media) {
   if (!media) {
@@ -92,6 +93,7 @@ function ResponseSample({ samples }) {
 }
 
 export default function ResponseSamples({ responses }) {
+  const responseCodeGroup = useResponseCodeGroup();
   const codes = Object.entries(responses ?? {}).flatMap(([code, response]) => {
     const samples = samplesFor(response);
     return samples.length > 0 ? [{ code, samples }] : [];
@@ -102,7 +104,10 @@ export default function ResponseSamples({ responses }) {
   }
 
   return (
-    <ApiTabs label="Response example" id="response-samples">
+    <ApiTabs
+      label="Response example"
+      id="response-samples"
+      groupId={responseCodeGroup}>
       {codes.map(({ code, samples }) => (
         <TabItem key={code} label={code} value={code}>
           <ResponseSample samples={samples} />

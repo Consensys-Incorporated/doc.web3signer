@@ -9,6 +9,7 @@ import RequestSamples, {
   requestExamples,
 } from "./RequestSamples";
 import ResponseSamples from "./ResponseSamples";
+import { ResponseCodeGroupProvider } from "../responseCodeGroup";
 
 function decodeApi(api) {
   const binary = atob(api);
@@ -74,21 +75,23 @@ export default function ApiStore({ api, children }) {
   );
   return (
     <Provider store={store}>
-      <div className="row theme-api-markdown">
-        <div className="col col--7 openapi-left-panel__container">
-          {children}
+      <ResponseCodeGroupProvider operationId={operation?.operationId}>
+        <div className="row theme-api-markdown">
+          <div className="col col--7 openapi-left-panel__container">
+            {children}
+          </div>
+          <div className="col col--5 openapi-right-panel__container">
+            <BrowserOnly>
+              {() => (
+                <Provider store={sampleStore}>
+                  <RequestSamples operation={operation} />
+                </Provider>
+              )}
+            </BrowserOnly>
+            <ResponseSamples responses={operation?.responses} />
+          </div>
         </div>
-        <div className="col col--5 openapi-right-panel__container">
-          <BrowserOnly>
-            {() => (
-              <Provider store={sampleStore}>
-                <RequestSamples operation={operation} />
-              </Provider>
-            )}
-          </BrowserOnly>
-          <ResponseSamples responses={operation?.responses} />
-        </div>
-      </div>
+      </ResponseCodeGroupProvider>
     </Provider>
   );
 }
