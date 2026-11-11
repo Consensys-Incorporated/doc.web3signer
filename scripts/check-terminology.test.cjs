@@ -47,7 +47,17 @@ test('flags deprecated Ethereum terminology in current guidance', () => {
   assert.match(errors[0], /consensus layer/);
 });
 
-test('flags curly apostrophe in security disclosure but not unrelated pages', () => {
-  assert.equal(checkMarkdown(file, 'Please don’t disclose secrets here.').length, 1);
+test('flags curly apostrophe in security disclosure on Unix and Windows paths', () => {
+  for (const filepath of [
+    'docs/reference/security-disclosure.md',
+    'docs\\reference\\security-disclosure.md',
+    'versioned_docs/version-26.10.2/reference/security-disclosure.md',
+    'versioned_docs\\version-26.10.2\\reference\\security-disclosure.md',
+  ]) {
+    const errors = checkMarkdown(filepath, 'Please don’t disclose secrets here.');
+    assert.equal(errors.length, 1, `expected failure in ${filepath}`);
+    assert.match(errors[0], /straight apostrophe/);
+  }
   assert.deepEqual(checkMarkdown('docs/index.md', 'Users don’t need extra setup.'), []);
+  assert.deepEqual(checkMarkdown('docs\\other\\security-disclosure.md', 'Users don’t need extra setup.'), []);
 });

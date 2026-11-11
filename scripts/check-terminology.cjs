@@ -19,6 +19,8 @@ function markdownFiles(dir) {
 }
 
 function checkMarkdown(file, content) {
+  // path.relative() uses the host OS separator (\\ on Windows).
+  const normalizedFile = file.replaceAll('\\', '/');
   const errors = [];
   let fence = null;
   let frontMatter = content.startsWith('---');
@@ -61,7 +63,7 @@ function checkMarkdown(file, content) {
       }
     }
 
-    if (/\breference\/security-disclosure\.md$/.test(file) && /\bdon’t\b/i.test(line)) {
+    if (/(?:^|\/)reference\/security-disclosure\.md$/.test(normalizedFile) && /\bdon’t\b/i.test(line)) {
       errors.push(`${file}:${lineNumber}: use straight apostrophe in don't`);
     }
   });
