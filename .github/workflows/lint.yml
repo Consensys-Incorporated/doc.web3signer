@@ -21,5 +21,8 @@ jobs:
       - name: Lint code
         uses: Consensys-Incorporated/github-actions/docs-lint-all@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
 
+      - name: Check terminology in current and stable docs
+        run: npm run check:terminology
+
       - name: Check Markdown formatting
         run: npm run format:docs:check
