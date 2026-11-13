@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -75,7 +76,54 @@
       "source": "/en/stable/:match(.*)",
       "destination": "/:match(.*)",
       "permanent": true
-    }
+    },
+    { "source": "/how-to/store-keys-hsm", "destination": "/", "permanent": true },
+    {
+      "source": "/how-to/store-keys-hsm/:match*",
+      "destination": "/",
+      "permanent": true
+    },
+    { "source": "/HowTo/Get-Started/Install-Binaries", "destination": "/get-started/install-binaries", "permanent": true },
+    { "source": "/reference/api/filecoin", "destination": "/reference/api", "permanent": true },
+    { "source": "/HowTo/Get-Started/Build-From-Source", "destination": "/get-started/build-from-source", "permanent": true },
+    { "source": "/HowTo/Get-Started/Use-Docker", "destination": "/get-started/use-docker", "permanent": true },
+    { "source": "/HowTo/Get-Started/Start-Web3Signer", "destination": "/get-started/start-web3signer", "permanent": true },
+    { "source": "/HowTo/Monitor/Logging", "destination": "/how-to/monitor/logging", "permanent": true },
+    { "source": "/HowTo/Monitor/Metrics", "destination": "/how-to/monitor/metrics", "permanent": true },
+    { "source": "/HowTo/Store-Keys-HSM/Use-USB-Armory", "destination": "/", "permanent": true },
+    { "source": "/HowTo/Store-Keys-HSM/Use-YubiHSM2", "destination": "/", "permanent": true },
+    { "source": "/HowTo/Store-Keys-Vaults/Use-AWS", "destination": "/how-to/store-keys/vaults/aws", "permanent": true },
+    { "source": "/HowTo/Store-Keys-Vaults/Use-Azure", "destination": "/how-to/store-keys/vaults/azure", "permanent": true },
+    { "source": "/HowTo/Store-Keys-Vaults/Use-Hashicorp", "destination": "/how-to/store-keys/vaults/hashicorp", "permanent": true },
+    { "source": "/HowTo/Configure-Slashing-Protection", "destination": "/how-to/configure-slashing-protection", "permanent": true },
+    { "source": "/HowTo/Configure-TLS", "destination": "/how-to/configure-tls", "permanent": true },
+    { "source": "/HowTo/Deploy-With-Kubernetes", "destination": "/how-to", "permanent": true },
+    { "source": "/HowTo/Use-Configuration-File", "destination": "/how-to/use-configuration-file-starting-web3signer", "permanent": true },
+    { "source": "/HowTo/Use-Signing-Keys", "destination": "/how-to/load-keys", "permanent": true },
+    { "source": "/Reference/CLI/CLI-Syntax", "destination": "/reference/cli/options", "permanent": true },
+    { "source": "/Reference/CLI/CLI-Subcommands", "destination": "/reference/cli/subcommands", "permanent": true },
+    { "source": "/Reference/Key-Configuration-Files", "destination": "/reference/key-config-file-params", "permanent": true },
+    { "source": "/Reference/Responsible-Disclosure", "destination": "/reference/security-disclosure", "permanent": true },
+    { "source": "/Tutorials/Launchpad-Keystores", "destination": "/tutorials/load-launchpad-keystores", "permanent": true },
+    { "source": "/category/get-started", "destination": "/get-started", "permanent": true },
+    { "source": "/category/how-to", "destination": "/how-to", "permanent": true },
+    { "source": "/category/tutorials", "destination": "/tutorials", "permanent": true },
+    { "source": "/category/reference", "destination": "/reference", "permanent": true },
+    { "source": "/category/monitor-nodes", "destination": "/how-to/monitor", "permanent": true },
+    { "source": "/category/store-keys-in-an-hsm-device", "destination": "/", "permanent": true },
+    { "source": "/category/store-keys-in-an-external-vault", "destination": "/how-to/store-keys/vaults", "permanent": true },
+    { "source": "/category/apis", "destination": "/reference/api", "permanent": true },
+    { "source": "/category/command-line", "destination": "/reference/cli", "permanent": true },
+    { "source": "/how-to/use-signing-keys", "destination": "/how-to/load-keys", "permanent": true },
+    { "source": "/how-to/configure-access-keys", "destination": "/how-to/load-keys", "permanent": true },
+    { "source": "/how-to/store-keys-vaults", "destination": "/how-to/store-keys/vaults", "permanent": true },
+    {
+      "source": "/how-to/store-keys-vaults/:match*",
+      "destination": "/how-to/store-keys/vaults/:match*",
+      "permanent": true
+    },
+    { "source": "/how-to/use-configuration-file", "destination": "/how-to/use-configuration-file-starting-web3signer", "permanent": true },
+    { "source": "/how-to/deploy-with-kubernetes", "destination": "/how-to", "permanent": true }
   ],
   "rewrites": [
     {
