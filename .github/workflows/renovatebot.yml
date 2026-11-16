@@ -2,7 +2,7 @@ name: renovatebot
 
 on:
   schedule:
-    - cron: "15 3 * * 0"
+    - cron: "15 3 * * *"
 
   # push:
     # branches:
@@ -16,7 +16,6 @@ permissions: {} # lock everything by default (least-privilege)
 jobs:
   renovatebot-check:
     runs-on: ubuntu-24.04
-    environment: security
     permissions:
       contents: read
     steps:
@@ -26,6 +25,6 @@ jobs:
       - name: Run renovatebot
         uses: Consensys-Incorporated/github-actions/renovatebot@633ca293fa3bc3490d58840b085245780774c989 # 2.0.0
         with:
-          GH_APP_ID: ${{ secrets.GH_APP_ID }}
-          GH_PRIVATE_KEY: ${{ secrets.GH_PRIVATE_KEY }}
+          GH_APP_ID: ${{ secrets.RENOVATE_APP_ID }}
+          GH_PRIVATE_KEY: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
           GH_REPOSITORY: ${{ github.repository }}
