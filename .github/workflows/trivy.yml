@@ -21,6 +21,6 @@ jobs:
       contents: read
       security-events: write
     # TODO: repin to the 2.0.0 release once Consensys-Incorporated/github-actions#6 merges
-    uses: Consensys-Incorporated/github-actions/.github/workflows/trivy.yml@cb261db88cd616d0b9e4e74cf7d83a6709a003f1 # feat/trivy-reusable-workflow
+    uses: Consensys-Incorporated/github-actions/.github/workflows/trivy.yml@e1b30b37e394d845e53a438c63c3a9234d6db59f # feat/trivy-reusable-workflow
     with:
       environment: security # holds SLACK_WEBHOOK
