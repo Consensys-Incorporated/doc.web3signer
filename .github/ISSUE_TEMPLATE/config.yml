@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Ask the Consensys community
-    url: https://discord.com/invite/consensys
+  - name: Web3Signer discussions
+    url: https://github.com/Consensys-Incorporated/web3signer/discussions
     about: Ask usage questions or discuss ideas that are not ready for a docs issue.
