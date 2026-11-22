@@ -30,8 +30,5 @@ REST APIs.
 
 ## API reference
 
-View the [REST API documentation] for more information about the available APIs.
-
-<!-- Links -->
-
-[REST API documentation]: https://consensys-incorporated.github.io/web3signer/
+View the [Consensus layer](/reference/api/eth2) and [Execution layer](/reference/api/eth1) reference
+for more information about the available APIs.

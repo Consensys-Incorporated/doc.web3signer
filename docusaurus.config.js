@@ -333,7 +333,7 @@ const config = {
           },
           {
             from: "/reference/api/filecoin",
-            to: "/reference/api",
+            to: "/reference/api/rest",
           },
           {
             from: "/HowTo/Get-Started/Build-From-Source",
@@ -445,7 +445,7 @@ const config = {
           },
           {
             from: "/category/apis",
-            to: "/reference/api",
+            to: "/reference/api/rest",
           },
           {
             from: "/category/command-line",
