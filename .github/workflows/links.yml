@@ -1,4 +1,3 @@
----
 name: Check for broken links
 
 on:
@@ -9,16 +8,16 @@ on:
 permissions: {} # lock everything by default (least-privilege)
 
 jobs:
-
   linkCheck:
     name: Link Checking
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # docs-link-check applies its Chrome sandbox fix on 24.04 only; Renovate leaves this pinned (renovate.json)
     permissions:
-      contents: read
+      contents: read  # least-privilege for this job only
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
       - name: LinkCheck
-        uses: Consensys-Incorporated/github-actions/docs-link-check@89c262a30cae735be99dc776f9556b796fb456ca # v1.0.0
+        uses: Consensys-Incorporated/github-actions/docs-link-check@10825e5427095aae0ca5686db2caa5029d693a4f # 2.0.1
         with:
           CONFIG_FILE: .linkspector.yml
+          CHANGED_FILES_ONLY: true
