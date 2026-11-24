@@ -40,6 +40,7 @@ Content includes installation, key loading and storage, API usage, and operation
 
 - Keep JSON-RPC docs in `docs/reference/api/json-rpc.md`.
 - Keep REST docs in `docs/reference/api/rest.md`.
+- Leave `docs/reference/api/eth1/` and `eth2/` alone. `gen-api-docs` writes those operation pages during start and build from the Web3Signer OpenAPI specs at the tag that matches `lastVersion`. Fix spec content in the Web3Signer repository.
 - Include method or endpoint, required parameters, and response behavior.
 
 ## Sidebar and redirects

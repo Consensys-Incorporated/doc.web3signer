@@ -84,8 +84,9 @@ about this option and the supported networks.
 
 ## Confirm Web3Signer is running
 
-Use the [`upcheck`](https://consensys-incorporated.github.io/web3signer/#tag/Server-Status/operation/UPCHECK)
-endpoint to confirm Web3Signer is connected and running.
+Use the [consensus layer upcheck](../reference/api/eth2/upcheck.api.mdx) or
+[execution layer upcheck](../reference/api/eth1/upcheck.api.mdx) endpoint to confirm Web3Signer is
+connected and running.
 
 <Tabs>
   <TabItem value="curl request" label="curl request" default>
