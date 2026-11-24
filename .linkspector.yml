@@ -19,6 +19,8 @@ ignorePatterns:
 - pattern: '^http(s)?://metamask.io'
 - pattern: '^http(s)?://.*\.hashicorp\.com'
 - pattern: '^/img/'
+# Operation pages under reference/api/eth1 and eth2 are generated at build time and gitignored.
+- pattern: 'api/eth[12](/|$)'
 aliveStatusCodes:
 - 200
 - 206
